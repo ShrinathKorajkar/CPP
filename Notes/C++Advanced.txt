@@ -1,0 +1,224 @@
+## C++11
+
+### Core language
+
+* **auto** type deduction
+* **nullptr** keyword
+* Strongly-typed **enum class**
+* **Range-based for** loops
+* **Lambda** expressions
+* **Rvalue references** and **move semantics** (`T&&`, `std::move`)
+* **Variadic templates**
+* **decltype**
+* **Static\_assert** compile-time checks
+* **constexpr** (initial limited form)
+* **Uniform initialization** / **initializer lists** (`{ }`)
+* **Delegating** and **inheriting constructors**
+* **Explicit** on conversion operators
+* **Override** and **final** specifiers
+* **Trailing return types** (`auto f() -> T`)
+* **Raw string literals** (`R"(…)"`)
+* New fundamental types: **char16\_t**, **char32\_t**
+
+### Standard library
+
+* **Smart pointers**: `std::unique_ptr`, `std::shared_ptr`, `std::weak_ptr`
+* **Thread support**: `std::thread`, `std::mutex`, `std::async`, `std::future`
+* **<chrono>** date/time utilities
+* **<regex>** regular expressions
+* **<tuple>**, **<array>**, **\<forward\_list>**
+* **\<unordered\_* containers>*\* (`unordered_map`, `unordered_set`, …)
+* **<random>** random number facilities
+* New algorithms: `std::begin`/`std::end`, `std::move`, `std::forward`
+
+---
+
+## C++14
+
+### Core language
+
+* **Generic lambdas** (`auto` in parameter lists)
+* **Binary literals** (`0b1010`) and **digit separators** (`1’000’000`)
+* **Return type deduction** for normal functions
+* Relaxed **constexpr** (more things allowed at compile time)
+
+### Standard library
+
+* `std::make_unique`
+* **Variable templates**
+* **Integer sequence** utilities (`std::integer_sequence`)
+* `std::exchange`
+
+---
+
+## C++17
+
+### Core language
+
+* **Structured bindings** (`auto [a,b] = pair;`)
+* **If/switch with initializer** (`if (auto x = …; x>0) …`)
+* **Inline variables**
+* **Fold expressions** for variadic templates
+* **Guaranteed copy elision** (mandatory in some cases)
+* **Template argument deduction** for class templates
+
+### Standard library
+
+* **std::optional**, **std::variant**, **std::any**
+* **std::string\_view**, **std::string::contains**, **starts\_with**, **ends\_with**
+* **<filesystem>** (`std::filesystem::path`, operations)
+* **Parallel algorithms** (`std::execution` policies)
+* **std::byte** type
+* `std::shared_timed_mutex`, `std::scoped_lock`
+
+---
+
+## C++20
+
+### Core language
+
+* **Concepts** (`template<typename T> concept …`, `requires` clauses)
+* **Ranges** (`std::ranges::view`, `std::ranges::algorithm`)
+* **Coroutines** (`co_await`, `co_yield`, `co_return`)
+* **Modules** (import/export replace `#include`)
+* **Three-way comparison** / **spaceship operator** (`<=>`)
+* **Constexpr** enhancements (dynamic allocations, virtual calls in constexpr)
+* **Designated initializers** (`S{.x=1, .y=2}`)
+* **char8\_t** and Unicode improvements
+* **consteval**, **constinit** functions
+
+### Standard library
+
+* **std::span**
+* **std::format** (Python-style formatting)
+* **std::syncstream** (thread-safe streams)
+* **std::chrono** calendar & timezone enhancements
+* **std::ranges** support across existing algorithms
+* **std::atomic[std::shared\_ptr](std::shared_ptr)**, **std::atomic[std::weak\_ptr](std::weak_ptr)**
+
+---
+
+## ✅ **C++23 – Language Features**
+
+### 🆕 Core Language Features
+
+* **Deduction guides for aliases**
+  Now allowed for template alias declarations.
+
+* **Explicit `this` parameter**
+
+  ```cpp
+  void foo(this MyClass& self);  // adds clarity and supports customization
+  ```
+
+* **Multidimensional `subscript` operator** (`operator[]`)
+
+  ```cpp
+  struct Matrix {
+      int operator[](size_t, size_t);  // now legal!
+  };
+  ```
+
+* **`static operator()`**
+  Functor classes can now define call operators as static methods.
+
+* **`constexpr` improvements**
+  More standard library and user-defined operations can be `constexpr`.
+
+* **`[[nodiscard("reason")]]` attribute message**
+  Lets you provide a reason when a return value should not be ignored.
+
+* **`typeof` and `reflexpr`** (Reflection TS) – **not adopted** into C++23 (delayed to future).
+
+---
+
+## 📚 **C++23 – Standard Library Features**
+
+### 💡 Ranges & Algorithms
+
+* **More ranges algorithms** (building on C++20 ranges):
+
+  * `std::ranges::fold_left`, `fold_right`
+  * `std::ranges::chunk_view`
+  * `slide_view`, `join_with_view`, `repeat_view`, `stride_view`
+  * `cartesian_product_view`
+
+* **`std::ranges::to`**
+  Collect results directly into containers:
+
+  ```cpp
+  auto vec = std::views::iota(1, 5) | std::ranges::to<std::vector>();
+  ```
+
+* **`std::views::zip`, `zip_transform`**
+
+### 🧮 Algorithms
+
+* New algorithms:
+
+  * `std::contains`
+  * `std::starts_with`, `std::ends_with` (added to containers)
+  * `std::move_only_function` (like `std::function` but move-only)
+
+### 🧵 Concurrency & Atomics
+
+* **`std::execution` improvements**
+* **`std::atomic<T>` for trivially copyable types**
+  Now supports more than just scalar types.
+* **`std::latch`, `std::barrier`** – standardized in <barrier>
+
+### 🔣 Strings & Formatting
+
+* **`std::print()` and `std::println()`**
+
+  ```cpp
+  std::println("Hello {}!", "World");
+  ```
+
+* `std::format` enhancements (Unicode, locale-aware formatting)
+
+### ⏱️ Chrono Improvements
+
+* Timezone-aware clocks
+* Local/UTC conversions
+* More chrono literals (like `12h`, `1d`, etc.)
+
+### 🧩 Other Utility Types
+
+* **`std::expected<T, E>`**
+  Safer alternative to exceptions:
+
+  ```cpp
+  std::expected<int, std::string> val = get_value();
+  ```
+
+* **`std::flat_map`, `std::flat_set`**
+  Sorted vector-based maps for small fast lookups.
+
+* **`std::stacktrace`** (for debugging backtraces)
+
+---
+
+## 🧪 Other Improvements
+
+* **Modules TS enhancements** – better module support across compilers
+* **Standard Library Module `std`** – use `import std;` instead of many `#include`s
+* **Improved `constexpr` standard library functions**
+
+---
+
+## 📝 Summary Table
+
+| Feature Area  | Examples/Highlights                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------- |
+| Core Language | `explicit this`, multidimensional `operator[]`, `static operator()`, nodiscard with message |
+| Ranges        | `zip`, `chunk_view`, `slide_view`, `cartesian_product`                                      |
+| Algorithms    | `contains`, `fold_left`, `fold_right`, `to<Container>`                                      |
+| Utilities     | `std::expected`, `flat_map`, `flat_set`, `move_only_function`                               |
+| Formatting    | `std::print`, `std::println`, improved `std::format`                                        |
+| Concurrency   | Better `atomic`, `barrier`, `latch`                                                         |
+| Debugging     | `std::stacktrace`                                                                           |
+| Modules       | `import std;`                                                                               |
+
+---
+

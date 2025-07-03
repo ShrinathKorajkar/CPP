@@ -2,7 +2,39 @@
     1. Performance :-  allow direct memory access and system resource access. optimal for speed and real time exe
     2. Control     :-  C and C++ provide a high degree of control over hardware resources and memory management.    
     3. application :-  Os, device driver, game development, embedded systems, network, compilers, databases
-    4. apps        :-  Vs code, unix, linux, windows, google search engine, unreal engine, counter strike
+    4. apps        :-  Vs code(electron framework), unix, linux, windows, google search engine, unreal engine, counter strike
+
+
+# Compiler Optimizations
+    1. Peephole
+        a. Remove redundant loads/stores
+        b. Replace multiplication/division by powers of 2 with shifts
+    2. Function inlining
+    3. Constant folding
+        a. replace variable with known constants and Evaluate constant expressions at compile time
+        b. int x = 2 * 3;  // folded to: int x = 6;
+    4. Loop unrolling
+        a. Expands loop body to reduce iteration overhead:
+        b. for (int i = 0; i < 4; ++i) a[i] = 0;
+            => a[0] = 0; a[1] = 0; a[2] = 0; a[3] = 0;
+    5. Loop fusion
+        a. combine loops with same bounds -> for() a[i] = 0; and for() b[i] = 0; combined into one loop
+    6. Dead code elimination
+    7. Branch prediction
+        a. Converts if-else to ternary or conditional moves (CMOV)
+        b. y = (x > 0) ? 1 : -1;
+    8. Memory and cache optimization
+        a. Data alignment: Align data to improve memory access speed
+        b. Reordering fields in structs to reduce padding
+        c. Prefetching hints for loops accessing large arrays
+    9. Register allocation
+        a. keeps freq used elements into register instead of ram
+    10. Tail call optimization
+        a. If a function ends by calling another function, it can reuse the current stack frame.
+        b. int recurse(int x) {
+                return recurse(x - 1);
+            }
+    11. Link time optimization :- can inline cross transaltion units
 
 
 # Memory Structure of C++
@@ -18,6 +50,9 @@
            stack, heap, thread-specific storage, and some parts of the data segment  =>  modifiable by the program
         e. Global offset table(addr of data and func), procedure linkage table(link call with act addr), Interrupt vector table(ptr pointing to handlers)
         f. After syntax and semantic analysis, symbol table created and memory for variables is reserved (not allocated)
+        g. static allocation - The size, type, and lifetime of the variable are known at compile time.
+        h. At compile time, compiler determine memory layout(stack frame, data segment etc), size, relative offset
+        i. Only heap layout is controlled at runtime.
 
     2. Env variables and Cmd line Args
         ## ENV
@@ -105,7 +140,7 @@
     18. global var are automatically initialized
     19. Tokens :- keywords, identifiers, literals, operator, punctuation, #, //
     12. The number of operands that an operator takes as input is called the operator’s arity. 
-    13. variable with register keyword - stored in register not ram and cannot use bitwise operators, max size = word length(reg size)
+    13. variable with register keyword - stored in register not ram and cannot use & operator to retrieve addr, max size = word length(reg size)
     14. cin = read word and leave \n in input buffer
         getline = read line and discard the \n from input buffer
     15. auto  :-  only using auto with variable allow compiler to automatically deduce the type

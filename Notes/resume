@@ -1,0 +1,28 @@
+Software Engineer
+In Time Tec, Bangalore
+Jul 2023 – Present
+
+Languages: C, C++, Python (basic), SQL  
+Tools: Git, GitHub, GDB, CMake, GTest  
+Concepts: OOP, SOLID, Design Patterns, Multithreading, Thread Synchronization, Memory Management  
+Technologies: Linux, TCP/IP, USB, PCoIP, Firmware, Embedded Systems  
+
+Underwent comprehensive C++ training (OOP, STL, templates, threading, C++11, SOLID design).
+Built multiple command-line tools for real-world use cases to strengthen core development knowledge:
+Elevator Simulation System – Multi-threaded C++ CLI tool handling concurrent user requests with real-time file input, queue management, and GTest-based unit testing.
+Food Recommendation Engine – A full-fledged CLI-based client-server system with authentication, sentiment analysis, preference-based suggestions, MySQL backend, and recommendation logic.
+Contributed to HP Anyware (Tera2 Zero Client) development:
+Worked on On-Screen Display (OSD) UI, Web UI modules, USB session handling, and SCEP certificate-related tasks.
+Implemented and debugged core features of the PCoIP session protocol with multi-threaded managers.
+Involved in features such as Session Failover, where a session switches gateways on failure.
+
+I joined In Time Tec on July 5 2023 as a fresher and still working here. After joining I have went under C++ training (basics, oops, templates, threads, C++11 concepts, SOLID, design principles). After the training i built command line applications using C++ to learn using c++ in real life. Those projects are:
+1. Elevator Simulation System:
+C++ concepts used:- threads, file handling, gtest
+Here no of floors, no of lifts, and no of basements are taken as a input in cmdline and then elevator program begins. Here a continous input is taken from file which gets appended with info whenever a user presses up or down button on any of the floors. According to the input and current position of the elevators, the nearest elevator will go to the user. It handles all the corner cases as well.
+2. Food Recommendation Engine:
+C++ Concepts used:- client-server architecture, gtest, sql database, sockets, csv files, oops, solid, design principles - Singleton, serialization and deserialization, threads.
+Here, the system is designed to help a food cafeteria in managing orders, recommending users food and maintaining records for admin and chef. client side contains commandline UI - for authentication(admin, chef, user). Users -checking todays menu rolled out by chef, placing orders, giving feedback for placed orders, Suggest improvements, update food preferences. Chef - roll out menu, view orders, view suggestions and feedbacks. Admin - generate monthly report, view/add/remove users, view/add/remove food items in menu. Server contains a recommendation engine which based on users preferences, food feedbacks suggest food to the user. sentiment analyser which analysis what users want and how the food is good or bad based on feedback, it also gives list of discarded items based on bad ratings to the admin. It connects with mysql database to store the info and server all the clients. 
+Also few other small projects like - music player, punch-in punch-out system. all command line interface in c++. 
+
+Apart from these extra small personal projects I have been working as a firmware developer mostly in C from past 2 years in a company level project called HP Anyware Tera 2. This project works on similar to RDP protocol - PCoIP protocol. here we have a Zero Client and a Remote workstation card. the RWC fits into PCIE port of workstation - takes all the graphical data, usb, audio/video and passes to client. the client decrypts the data and show the pixels on monitors, audio as well to the user connected far away. the ZC also connects to VMs hosted on cloud and passes keyboard, mouse interactions to the VMs as well using soft agent(similar to RWC). This project uses multithreading where each functionality is handled by different thread(which we call a manager like usb manager, session manager). Here I have worked on on screen display UI, web UI, USB issues, SCEP issue, session failover to different gateways. 
