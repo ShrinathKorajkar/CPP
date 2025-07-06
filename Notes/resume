@@ -26,3 +26,91 @@ Here, the system is designed to help a food cafeteria in managing orders, recomm
 Also few other small projects like - music player, punch-in punch-out system. all command line interface in c++. 
 
 Apart from these extra small personal projects I have been working as a firmware developer mostly in C from past 2 years in a company level project called HP Anyware Tera 2. This project works on similar to RDP protocol - PCoIP protocol. here we have a Zero Client and a Remote workstation card. the RWC fits into PCIE port of workstation - takes all the graphical data, usb, audio/video and passes to client. the client decrypts the data and show the pixels on monitors, audio as well to the user connected far away. the ZC also connects to VMs hosted on cloud and passes keyboard, mouse interactions to the VMs as well using soft agent(similar to RWC). This project uses multithreading where each functionality is handled by different thread(which we call a manager like usb manager, session manager). Here I have worked on on screen display UI, web UI, USB issues, SCEP issue, session failover to different gateways. 
+
+✅ Top Skills Hiring Managers Look For (C/C++ – 2 Years Exp)
+🔧 Must-Have Technical Skills
+Area	Examples
+✅ Core Language	C++ (at least C++11), C
+✅ OS Knowledge	Linux (user space, POSIX), basic shell
+✅ Debugging	GDB, valgrind, logs, assertions
+✅ Multithreading	std::thread, pthreads, mutex, condition_variable
+✅ Data Structures & Algorithms	STL, linked lists, trees, heaps, sorting, etc.
+✅ Memory Mgmt	Heap vs Stack, malloc/new, delete/free, leaks
+✅ Compilation	Make, CMake, understanding linking/headers
+✅ Version Control	Git, GitHub/GitLab
+✅ Unit Testing	GTest or custom harness
+✅ Networking	TCP/IP basics, sockets (for systems/devices)
+✅ Protocols	UART, USB, SPI, CAN, or PCoIP/RDP (for embedded)
+
+🔐 Bonus/Niche Skills
+Area	Examples
+Embedded	Bare-metal, RTOS, FreeRTOS
+Secure Auth	Smart card, SCEP, PKI
+Tools	Jenkins, Docker, SonarQube
+Design	SOLID, OOP, UML, MVC
+Scripting	Python or Bash for automation/testing
+Build & Deploy	Cross-compilation, Yocto (for embedded)
+
+💬 Soft Skills Companies Look For
+Clear communication (esp. when debugging/reporting issues)
+Ownership of features/modules
+Willingness to mentor juniors
+Documentation & team collaboration
+
+Week 1–2	Core C++, C++11+, OOP, Memory, Pointers
+Week 3–4	Data Structures + Algorithms + STL
+Week 5	OS, Linux internals, multithreading
+Week 6	Debugging, Smart Pointers, Design Patterns
+Week 7	System Design (Low-Level Design)
+
+Naukri, InstaHyre, CutShort, LinkedIn
+Pramp, Interviewing.io
+
+🚀 Top Product-Based Companies (C/C++ Focused)
+Company	Roles
+Nvidia | Systems, GPU driver, HPC, CUDA, firmware
+Qualcomm | Embedded systems, modem firmware, SoC driver
+Intel | Firmware, BIOS, embedded, system software
+Google (gTech, Search infra) | Systems/backend with C++ focus
+Microsoft | Windows kernel, MS Office, VS Code C++
+Apple | Embedded, Secure Enclave, OS internals (limited hiring in India)
+Amazon (AWS, Devices) | Firmware, embedded, Alexa, Graviton SoC
+Samsung R&D | Firmware, mobile platform, display systems
+Adobe | PDF engine, Photoshop core, performance optimization
+Cisco | Network device firmware, protocol stack (Bangalore)
+VMware | Hypervisor, driver teams
+Texas Instruments | Real-time embedded software, chip drivers
+Analog Devices (ADI) | Embedded systems, signal processing
+Synopsys | EDA tools, compiler, verification
+AMD | GPU drivers, low-latency firmware, SoC testing
+
+💼 High-Frequency / Fintech / Quant (C++/DSA Focused)
+D. E. Shaw | Quantitative tech, infra, backend
+Tower Research | High-frequency trading systems (ultra-low latency C++)
+Hudson River Trading | Core infra, systems C++
+Jump Trading | Real-time trading engines
+Graviton Research | Quant infra
+Arcesium | Backend/infra in C++/Java
+Virtusa xLabs (for Quant clients) | Financial systems in C++
+
+🧪 DeepTech / Systems Startups (High Pay)
+Ather Energy | EV firmware, real-time systems
+GreyOrange | Robotics, real-time embedded
+Tessolve (Hero Electronix) | Firmware and validation
+Sama (ex-MuSigma founders) | Custom silicon + OS
+Zebra Technologies | Scanner/IoT firmware
+Capillary Tech | Edge computing C++ dev
+DeepRoot Linux | Kernel, Linux customization
+Cimpress/Vistaprint | Print platform firmware/backend
+Vehant Technologies | Surveillance/AI devices embedded dev
+Steradian Semiconductors (Acquired by Renesas) | Radar firmware
+Soliton Technologies | Device control software (instruments)
+
+📦 Core Embedded / Industrial MNCs (High-paying teams)
+Robert Bosch | Good pay in IPN team & automotive firmware
+HARMAN (Samsung) | Automotive, infotainment, C/C++, QNX
+GE Healthcare | Firmware and platform teams
+Schneider Electric | Embedded control units
+Honeywell | Avionics, automation systems
+L&T Technology Services | High-end embedded projects (some roles pay 16+)
+
