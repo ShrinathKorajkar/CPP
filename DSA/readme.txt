@@ -64,4 +64,5 @@ Notes:
         Total: 2^n
     4. Permutations: n! (doesn't include {})
     5. Subset: Subsequence that do not preserve order (both 1,3 and 3,1 are valid)
+    6. BST: inorder traversal is sorted, log N search
 
