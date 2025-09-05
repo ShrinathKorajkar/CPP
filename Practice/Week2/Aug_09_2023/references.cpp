@@ -23,15 +23,15 @@ void printRef(int &&a)
 }
 
 // Perfect Forwarding
-void foo(int &x)
-{
-    std::cout << x << std::endl;
-}
-
+/*
+    pass arguments exactly as they were received:
+    If the caller passed an lvalue → forward as lvalue.
+    If the caller passed an rvalue → forward as rvalue.
+*/
 template <typename T>
 void wrapper(T &&arg)
 {
-    foo(std::forward<T>(arg));
+    printRef(std::forward<T>(arg));
 }
 
 int main()

@@ -17,6 +17,30 @@ void swap(int &a, int &b)
     int temp = a;
     a = b;
     b = temp;
+
+    // using only two values
+    /*
+        a = a + b;
+        b = a - b;
+        a = a - b;
+
+        OR
+
+        a = a ^ b;
+        b = a ^ b;
+        a = a ^ b;
+
+        OR
+
+        a = a * b;
+        b = a / b;
+        a = a / b;
+
+        There is risk of overflow a + b, b == 0, ^ works only with int
+        a ^ a = 0,
+        a ^ 0 = a
+        a ^ b ^ b = a (XOR is reversible)
+    */
 }
 
 int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};

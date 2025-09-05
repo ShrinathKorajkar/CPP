@@ -70,3 +70,24 @@ public:
         getRegularHours();
     }
 };
+
+// bad practice
+class SensorManager
+{
+public:
+    void readSensor() { /* Read from I2C sensor */ }
+    void saveToEEPROM(int data) { /* Save sensor data to EEPROM */ }
+};
+
+// good practice
+class SensorReader
+{
+public:
+    int readSensor() { /* Read from I2C */ return 42; }
+};
+
+class EEPROMStorage
+{
+public:
+    void saveData(int data) { /* Save to EEPROM */ }
+};

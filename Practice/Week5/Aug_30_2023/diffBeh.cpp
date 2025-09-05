@@ -19,6 +19,8 @@ public:
     void *operator new(size_t size)
     {
         cout << "Custom new operator called" << endl;
+        // std::cout << "No this pointer present inside new as no obj created yet";
+        // std::cout << "compiler implicitly make new and delete as static " << this->value << std::endl; // Error
         void *memory = malloc(size);
         return memory;
     }

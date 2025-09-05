@@ -16,6 +16,10 @@
 		f. core/core-dump is file that contains snapshot of pgm mem at crash
 		g. In vs code left pannel -> run and code to use gdb
 		h. convenience variables
+        i. core dump - core file is a snapshot of a process's memory at the moment it crashes 
+           (term comes from 1960s magnetic core memory -> dump the contents into file for debug)
+           (contains - stack, heap, code, registers, Instruction pointer, thread state)
+           In linux -> /var/crash/vmcore-dmesg.txt
 
     2. Commands
         a. gdb pgrm
@@ -35,6 +39,7 @@
            enable [breakptNo]
            delete [breakptNo]
            delete breakpoints
+           info breakpoints
 
         i. continue             :-  to continue program
            clear                :-  deletes most recently set breakpt
@@ -405,6 +410,7 @@
             - Write minimal code
             - run the test
             - refactor -> if code passes, structure, clarity improvements
+        d. slower development, frequent modification can occur(tight coupling)
 
 
 # GTest
@@ -660,7 +666,7 @@
         1. FakeWebsited lookalike real
         2. Links/Popups -> take to website or install malware
         3. Apps -> free versions, games (.exe, .reg, .bat, .zip, .pdf)
-    b. Securew
+    b. Secure
         1. Updates
         2. Privacy settings
         3. PopUp blockers

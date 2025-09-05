@@ -18,7 +18,7 @@ public:
         this->imag++;
         return temp;
     }
-    Complex operator++() // pre-inc
+    Complex &operator++() // pre-inc
     {
         this->real++;
         this->imag++;

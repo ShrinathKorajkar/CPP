@@ -24,7 +24,7 @@ public:
         std::cout << "Distance: " << feet << std::endl;
     }
 
-    operator double() const // conversion operator
+    operator double() const // conversion operator, type-cast operator
     {
         return feet;
     }

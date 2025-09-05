@@ -66,6 +66,13 @@ void closeFile(FILE *file)
 void smartPointers()
 {
     // Unique
+    /*
+    template<
+        class T,
+        class Deleter = std::default_delete<T> // by default calls delete
+    > class unique_ptr;
+    The deleter should be callable -> deleter(); // Can pass func pointer, lambda, functor
+    */
     std::unique_ptr<int> ptr = std::make_unique<int>();
     std::unique_ptr<int> ptr2(new int(42));
     std::unique_ptr<int[]> arrayPtr(new int[10]);
@@ -76,14 +83,15 @@ void smartPointers()
     *ptr = 43;
     std::cout << "Unique Ptr : " << *ptr << std::endl;
 
-    ptr.swap(ptr2);
+    ptr.swap(ptr2); // pointer references are swapped
 
     int *rawPtr = ptr.get();
     int *rawPtr2 = ptr2.release();
     std::cout << "Raw Ptr using get : " << *rawPtr << std::endl;
     std::cout << "Raw Ptr using release : " << *rawPtr2 << std::endl;
+    delete rawPtr2;
 
-    ptr.reset();
+    ptr.reset();             // delete obj. ptr is now nullptr
     ptr2.reset(new int(19)); // resetting  with new obj
     std::cout << std::endl;
 
@@ -97,7 +105,7 @@ void smartPointers()
     std::cout << "Shared 2 : " << *sharedPtr2 << std::endl;
     std::cout << "Use Count : " << sharedPtr.use_count() << std::endl;
 
-    sharedPtr.reset();
+    sharedPtr.reset(); // only this pointer is set to nullptr, only delete if reference count 0, dont have release
 
     std::cout << "Is Unique : " << sharedPtr2.unique() << std::endl;
     std::cout << std::endl;

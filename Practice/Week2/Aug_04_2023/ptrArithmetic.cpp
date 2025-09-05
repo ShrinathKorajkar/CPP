@@ -53,6 +53,7 @@ int main()
 	//
 	int ar[2][4] = {1, 2, 3, 4, 5, 6, 7, 8};
 	cout << *(ar[1] + 2) << *(*(ar + 1) + 2) << 2 [1 [ar]];
+	// *(arr + colSize * i + j) the way compiler finds -> thus needs second arg in 2D array
 
 	char *lfc[] = {"C", "C++", "Java", "VBA"};
 	char *(*pt)[4] = &lfc;

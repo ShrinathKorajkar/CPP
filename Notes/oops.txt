@@ -21,6 +21,7 @@
     17. Imcomplete types ->  declared but not fully defined
     18. Lazy Evaluation  ->  compiler won't validate implementation of member functions until it's necessary(obj created)
     19. Encapsulation -> data, get, set, compute data.       Abstraction -> wheel, break, accelator
+    20. Prefer "has-a" over "is-a" unless the subclass truly extends base behavior. (composition over inheritance)
 
 
 ## CLASSES AND OBJECTS
@@ -69,10 +70,13 @@
     3. base constr is called first, base destruc is last
     4. In-class member initialization, member variable are initialized in order of decl
     5. A const member/object requires user defined default constructor as const req initialization at time of creation (when data members don't have default value)
+       The compiler won't provide default constructor when const, ref members are present.
     6. use delete and default keyword
     7. user defined constructor is req =>  const obj or member, initialization, dynamic data
         user defined destructor is req =>  deallocate res, virtual destruc
     8. Rules :-  define constr, copy const, copy assign, move constr, move assign, dest
+       - rule of 3 :- if defined any of 3, then define all three (dest, copy const, copy assign op)
+       - rule of 5 :- in above add move const, move assignment op
     9. Benefits of List initialization
         - allow to assign const member and reference members
         - declare and initialize at once
@@ -85,6 +89,9 @@
     14. Elision   ->  direct intialization of object without copy constructor in declaration step
     15. Rule of 3 ->  A class which req destructor must have constr, copy constr and copy assign ope
     16. Default values to be written in func declaration not in definition in headerfile
+    17. If move constructor is marked noexcept, containers(vector,map,string) will prefer moving because it’s faster.
+        If it’s not marked noexcept, containers might fall back to copying to maintain strong exception safety guarantees.
+        The standard library uses std::is_nothrow_move_constructible<T> to check
 
     10. Destructor =>  automatically called when obj goes out of scope, perform cleanup, deallocate, release resource
         - default destructor does not have body
@@ -195,6 +202,7 @@
     3. Single Inheritance
         a. derived class inherit from only one base class
         b. Object Slicing :-  loss of data members and beh, when derived class obj is assigned to base class obj
+        c. Derived will have size of base class with padding + its data (int,char -> char, int => 16 bytes)
     
     4. Multiple Inheritance
         a. single class inherit from multiple base classes
@@ -232,6 +240,7 @@
                                - has to be constant if in-class initialization
                                - has to be defined outside class else
                                - data segment, class scope, lifetime is program
+                               - when inherited, shared between base and derived - no 2 copies
         c. outside/global  ->  restrict scope to current translation unit, external linkage not possible
                                - stored in data segment
                                - lifetime is program
@@ -244,7 +253,6 @@
         d. initialized before main is called
         e. static cannot be overloaded, virtual, can be inherited(not override but diff func)
         f. can be initialized in class -> inline, constexpr, const keyword
-        g. not subjected to access specifier
 
 
 ## FRIEND
@@ -270,7 +278,7 @@
       - base class through a shared interface.
       - dynamic binding can only be done using & and *
       - Open/Closed Principle - Open for extension and closed for modification
-      - Binding  ->  converting identifiers into address
+      - Binding  ->  converting identifiers into address (when and how func call is associated(bound) to its actual implementation)
       - most derived class is responsible for constructing virtual class
 
     2. STATIC POLYMORPHISM
@@ -281,7 +289,8 @@
             - return type does not affect
             - best match ->  exact, promotion
             - same function can be overloaded in derived class with same param
-            - overloading func in derived class will hide all functions from base class
+            - overloading func in derived class will hide all functions from base class(method hiding)
+            - method hiding can be prevented with - using base::func1; or derivedobj->base::func1()
         d. operator overloading
             - can be overloaded with only user-defined types no built-in types
             - Types - member func, non-member func(global)
@@ -294,6 +303,13 @@
             - [] ->  subscript operator
             - if want symmetry (1 + a, a + 1) use non-mem
             - return reference of left object in         ->   =  pre++--  []()  ->*  <<
+            - by default conversion operator is implicit ->  operator targetType() const{}
+            - Rule -> return by value for operator that create new object (eg +, -, *)
+                   -> return by reference for operators that modify this object and allow chaining (eg =, +=, ++(pre-inc), [])
+                   -> check (this != &other) for operators that modify this object
+                   -> logical, arithmetic, bitwise, comparison, stream operators require symmetry
+                   -> new and delete should be public and static (both should be defined if one defined)
+                   -> Static → Because they don’t work on an object (you are trying to create/destroy the object itself, so there is no valid this yet).
 
     3. DYNAMIC POLYMORPHISM
         a. Overriding
@@ -305,7 +321,9 @@
             - we cannot use static, friend
             - A friend function cannot be declared as virtual. However, it's possible 
               for a virtual function to be declared as a friend function.
-            - virtual assignment operator
+            - friend virtual void func(); // error
+              B::virtual void display(); -> A::friend void B::display(); // possible
+            - virtual copy assignment operator (only works with pointers or else obj slicing will still occur)
             - :: can be used to call without calling virtual
             - A base class destructor should be either public and virtual, or protected and nonvirtual.
 
@@ -338,6 +356,7 @@
             - always use virtual destructor if inheritance is present
             - virtually inherited classes must have virtual destructor
             - if base class has virtual destructor, all children must have
+            - define - if class has any virtual func, if class is abstract, 
 
         e. Virtual Base Class Table
             - in virtual inheritance
@@ -355,6 +374,7 @@
 
         - reduce the rebuild, retest and redeploy
         - There is no model that is natural to all contexts
+        - object oriented design principles -> makes software easier to maintain, extend, and understand.
 
     1. Robert C Martin - Maintainable and scalabel Object oriented code
         - It is not wise to apply any principle for that matter, if there is no symptom.
@@ -387,9 +407,12 @@
         c. no code should be forced to depend on methods it does not use.
         d. ISP splits interfaces that are very large into smaller and more specific ones so that clients
            will only have to know about the methods that are of interest to them.
+        e. Many specific interfaces are better than one large general-purpose interface -> Clients should not be 
+           forced to depend on methods they do not use.
 
     6. Dependancy Inversion Principle (DIP)
-        a. high level modules should not depend on low level modules. abstraction should not depend on details
+        a. high level modules should not depend on low level modules. Both should depend on abstractions. 
+           abstraction should not depend on details. Details should depend on abstractions.
         b. use of interface and abstraction -> flexibility
         c. instead of creating two objects of sms and email in notification
            create sender interface and make it implement by sms and email and create obj of sender in notification
@@ -685,4 +708,35 @@
     1. coroutines                                         2. three way comparision <=>
     3. <bit>                                              3. <execution> <jthread>
     4. <format>                                           5. std::condition_variable_any
+
+
+# Designing
+    1. Understand domain
+        a. Entities(nouns) - user, bank
+        b. Actions(verbs) - create account
+        c. Relationships
+    2. Apply principles - SOLID, Encapsulation, SLAP, composition over inheritance
+    3. Identify responsibility
+        a. who should own the data
+        b. who should perform the Action
+        c. Eg:
+            i. bank - manages accounts, holds ref to all users, process high-level operations
+            ii. user - hold personal details, login creds
+            iii. account - holds balance, account number
+            iv. transaction - record amount, date, type(deposit/withdraw)
+            v. admin - special user with privileges
+            vi. accountholder - relationship between user and account
+    4. Map actions to their owner
+        a. bank - createAccount(User), processTransaction(Transaction), vector<Account>, vector<User>
+        b. user - login(name, pass), viewAccounts(), name,credentials
+        c. account - deposit(amount), withdraw(amount), getBalance(), transactionHistory
+        d. transaction - execute()
+    5. Deside Parameters
+        a. pass only what the class doesn't already own
+        b. use objects instead of many params
+        c. keep func small and focused
+    6. Seperation of concerns
+        a. UI/Presentation layer - Menus, prompts, input/output
+        b. Business logic layer - bank, account, transaction class - rules and processing
+        c. data access layer - handles database or file storage
 

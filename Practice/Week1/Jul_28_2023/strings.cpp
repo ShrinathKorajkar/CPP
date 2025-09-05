@@ -62,7 +62,7 @@ int main()
     cout << "\nPushBack('x') : " << hello;
 
     hello.pop_back();
-    cout << "\nPopBack()" << hello;
+    cout << "\nPopBack() : " << hello;
 
     hello.append(" Once Again");
     cout << "\nAppend("
@@ -79,15 +79,16 @@ int main()
             ") : "
          << hello;
 
-    hello.resize(15, '*');
+    hello.resize(25, '*');
+    std::cout << "\nresize: " << hello << std::endl;
 
     //
     // #  SEARCHING AND MANIP
     string search = "Shri in ITT";
-    const char *charArray = search.c_str();
+    const char *charArray = search.c_str(); // always const char* null terminated
     cout << "\ncStr() : " << charArray;
 
-    const char *dataPtr = search.data();
+    const char *dataPtr = search.data(); // c++11 -> not guranteed to be null terminated and c++17 -> non-const string
     cout << "\ndata() : " << dataPtr;
 
     string subString = search.substr(8);

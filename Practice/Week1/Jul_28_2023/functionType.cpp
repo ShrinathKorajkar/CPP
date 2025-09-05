@@ -60,12 +60,12 @@ int main()
     //
     int a, b;
     std::cin >> a >> b;
-    int result = add(a, b); // constexpr will be ignored
-    cout << result << endl;
+    int result2 = add(a, b); // constexpr will be ignored
+    cout << result2 << endl;
 
     constexpr int res = add2(5, 10); // Computed at compile time
     cout << res << endl;
 
-    std::cout << getValue << '\n'; // return true
+    std::cout << getValue() << '\n'; // return true
     return 0;
 }

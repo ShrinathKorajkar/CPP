@@ -44,7 +44,7 @@ int main()
 
     if (z > r)
     {
-        cout << "x is greater: ";
+        cout << "z is greater: ";
         cout << z << endl;
     }
     else
@@ -62,11 +62,11 @@ int main()
     std::cout << std::hex << 10 << std::endl;
     std::cout << std::dec << 10 << std::endl;
 
-    std::cout << sizeof(int) << std::endl;
-    std::cout << sizeof(long) << std::endl;
-    std::cout << sizeof(long int) << std::endl;
-    std::cout << sizeof(long long int) << std::endl;
-    std::cout << sizeof(size_t) << std::endl
+    std::cout << "sizeof int : " << sizeof(int) << std::endl;
+    std::cout << "sizeof long : " << sizeof(long) << std::endl;
+    std::cout << "sizeof long int : " << sizeof(long int) << std::endl;
+    std::cout << "sizeof long long int : " << sizeof(long long int) << std::endl;
+    std::cout << "sizeof size_t : " << sizeof(size_t) << std::endl
               << std::endl;
 
     // floating point

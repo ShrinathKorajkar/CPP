@@ -172,6 +172,9 @@
     35. variable-length arrays (VLAs) to allocate memory on the stack with a size determined at runtime. (int n; int arr[n];)
         VLAs cannot be static or global
     36. We need to pass second arg in func taking 2D array as it calculates using : *(arr + colSize * i + j) with pointers : *(*(arr + i) + j)
+    37. char* is always treated as C-string unless explicitly cast (void*)p while printing\
+    38. Defaults are handled at compile-time, not run-time -> func() will be replaced by func(34), if default is present.
+    39. You can use <user.h> instead of "user.h" if you pass -I<dir> of include while compiling
 
 
 # Data and Data Types
@@ -262,9 +265,19 @@
 
     7. Type Qualifiers
         a. const      :-  constant
-        b. volatile   :-  can be changed by external force. reload value from mem, each time accessed. not optimise
+        b. volatile   :-  can be changed by external force. reload value from mem, each time accessed. not optimise (can be changed by interrupts, threads, registers)
         c. restrict   :-  only assigned pointer can change memory (int* restrict a). promise to compiler that mem do not overlap.
-        d. mutable    :-  can change const function also   (private:  mutable int a)
+        d. mutable    :-  can change const function also   (private:  mutable int a), const obj can modify
+
+    7.1. Function Specifiers
+        a. inline 
+        b. virtual
+        c. explicit
+        d. constexpr/consteval/constinit
+        e. friend
+        f. override
+        g. final
+        h. noexcept
 
     8. Special Data Types
         a. decltype(a + b) c  :-  declare c of type returned by a + b and save the result
@@ -414,7 +427,7 @@
             h. dangling reference  :-  reference to destroyed object
             i. Overloading precedence :- lvalue -> const -> rvalue
         
-        2. const int &ref = 10  =>  const reference can bind rvalue references. It increase the lifetime
+        2. const int &ref = 10  =>  const reference can bind rvalue references. As it won't change value, whereas normal int &ref can modify value it references
            int &&rref = 10      =>  Rvalue reference can hold temporary objects for move semantics and transfer ownership (stored in register)
 
         3. Reference Collapse
@@ -448,11 +461,23 @@
     c. organize, extend, reuse, test, abstraction
     d. diff definition and prototype gives linking error compile fine
     e. array get decayed to pointer to first memory in function
+    f. Reentrant function - Interrupt service routines
+        - safely interrupted in middle of execution and called again by another thread, task, or interrupt handler
+          without affecting previous execution.
+        - does not use static, shared, global data
+        - does not modify its own code
+        - does not use non-reentrant functions
+        - uses local (stack) variables
+        - help to prevent race conditions, data curruption
+        int increment(int counter) {
+            return counter + 1; // Uses local variable → REENTRANT
+        }
 
 
 # TIME
-    time_t  :-  time since Jan 1, 1970
+    time_t  :-  time since Jan 1, 1970 (Unix Epoch time -> Unix sys started dev, can be stored in 32-bit int(easy computation), till Jan 19 2038)
     clock_t :-  processor time
+    New OS, glibc34 uses 64 bit -> can store more than expected time of universe
 
     funcitions :
         a. time()     :-  current time as time_t value
@@ -490,8 +515,8 @@
     1. naming collision occurs at linking  =>   using header guards, no func and variable declarations
     2. global scope -> global namespace
     3. using myInt = int;
-    4. Object-like macros, function like macros
-    5. Using directives are not preprocessor directives
+    4. Object-like macros(#define PI 3.14159), function like macros(#define SQUARE(x) ((x) * (x)))
+    5. Using directives are not preprocessor directives (processed during semantic analysis)
     6. header files  :-  .h, .hpp, no-extension
     7. #pragma once  :-  used as header guard to include it only once
         alternative  :-  #ifndef HEADER_H  
@@ -789,13 +814,17 @@
         d. static linking use :- 
             - portable                          - performance critical apps
             - freeze dependencies
+            - Used in embedded systems(fewer runtime dependencies), easy to distribute, faster startup time, 
+              performance critical. (No dynamic symbol resolution)
         e. implicit d linking :- 
             - Dynamic Updates                   - common functionality
+            - OS loads, and resolves - system level softwares(libc.so), applications using large common lib, reduce bin size, apps
         f. explicit d linking :-  
             - add optional features             - dynamic load balancing
             - cross platform support            - delayed loading
             - conditional behaviour at runtime by user input
-            - application with plugin, extension. allow to load plugin w/o compilation of main pgm
+            - application with plugin, extension. allow to load plugin w/o compilation of main pgm.
+              cross platform (load diff .so based on os), update func without restarting app, game engines
         
     2. Static Linking
         a. combine all necessary files into single file at compile time
@@ -1152,6 +1181,34 @@
         - @since                        : Indicate the version when an entity was introduced.
         - \ instead @ for Qt
 
+
+# Versions
+    1. C++98
+        a. first international std
+        b. templates, STL, exceptions, namespace
+    2. C++03
+    3. C++11
+        a. major update
+        b. auto, nullptr, enum class
+        c. lambda, range for, static_assert, constexpr
+        d. move semantics - rvalue, smart pointers, std::move
+        e. std::thread, mutex
+    4. C++14
+        a. generic lambda, decltype(), variable templates, std::make_unique
+    5. C++17
+        a. if constexpr, structured binding(auto [x,y] = ...)
+        b. std::variant, std::optional, std::any, std::string_view
+        c. inline variables, <filesystem>
+    6. C++20
+        a. Coroutines, Modules(export and import files), consteval, constinit
+        b. ranges library, three-way comparison (<=>), spaceship operator
+        c. calendar and timezone support
+        d. immediate functions(consteval), std::span, std::format
+    7. C++23
+        a. std::expected, std::print, std::println
+        b. [[assume]]
+        c. std::flat_map, flat_set
+        d. multidimentional subscript operator a[i, j]
 
 /project_root
 │
