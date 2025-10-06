@@ -1,4 +1,5 @@
 #include <iostream>
+#include <numeric>
 
 /*
 Euclid's Algo
@@ -18,6 +19,17 @@ int greatestCommonDivisor(int a, int b)
     // return greatestCommonDivisor(b, a - b);
 }
 
+int gcd(int a, int b)
+{
+    while (b != 0)
+    {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
 int lcm(int a, int b)
 {
     int gcd = greatestCommonDivisor(a, b);
@@ -27,5 +39,6 @@ int lcm(int a, int b)
 int main()
 {
     std::cout << greatestCommonDivisor(24, 88) << std::endl;
+    std::cout << std::gcd(24, 88) << std::endl;
     return 0;
 }

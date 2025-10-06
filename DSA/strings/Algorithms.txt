@@ -1,0 +1,16 @@
+# Pattern Matching
+    Naive Pattern Matching (O(n·m))
+    KMP Algorithm (Knuth–Morris–Pratt, O(n+m))
+    Rabin–Karp Algorithm (rolling hash, average O(n+m))
+    Z-Algorithm (pattern search in O(n+m))
+    Finite Automata Method (precomputed state machine)
+    Kasai’s Algorithm (LCP array in O(n))
+
+# Palindrome Related
+    Manacher’s Algorithm (longest palindromic substring in O(n))
+    Expand Around Center (palindrome detection)
+
+# String Compression / Transformation
+    Run Length Encoding (RLE)
+    Huffman Coding (compression)
+    Burrows–Wheeler Transform (used in compression like bzip2)

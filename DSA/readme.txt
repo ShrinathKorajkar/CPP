@@ -5,7 +5,6 @@ TODO:
 1. Solid Principles
 2. Design Patterns
 3. DSA
-4. QT
 
 Approach:
     1. Bit manipulation
@@ -35,16 +34,21 @@ Notes
     - Any number n in decimal has logN + 1 numbers in its binary representation
     - Binary search - start + (end - start)/2 (will not give mem overflow)
 
-std::to_string(int val)
-std::reverse(a.begin(), a.end())
-std::to_lower(char)
-std::isalnum(char)
-std::swap(char, char)
-std::sort(begin(), end())
-s.resize()
-s.find*()
-s.substr(start, end)
-s.erase(start, length)
+Common Algos
+    std::to_string(int val)
+    std::reverse(a.begin(), a.end())
+    std::to_lower(char)
+    std::isalnum(char)
+    std::swap(char, char)
+    std::sort(begin(), end())
+    s.resize()
+    s.find*()
+    s.substr(start, end)
+    s.erase(start, length)
+    std::stoi(str.c_str());
+    std::gcd(a, b) => <numeric>
+
+    std::accumulate(vec.begin(), vec.end(), 0) => to find sum of vec (<numeric>)
 
 Modulo Arithmetics
     1. (x + y) % m = (x % m) + (y % m)
@@ -59,6 +63,7 @@ Notes:
     1. Subarray: subgroup of array(order is maintained, contiguous part, must be adjacent elements) 
         {1,2,3,4} -> {1}, {2}, {3}, {4}, {1,2}, {2,3}, {3,4}, {1,2,3}, {2,3,4}, {1,2,3,4}
         Total: n(n+1)/2
+        array with min 2 elem = n(n+1)/2 - n => n(n-1)/2
     2. Subsequence: sequence maintains order but not contiguous
         {1,2,3} -> {}, {1}, {2}, {3}, {4}, {1,2}, {1,3}, {1,4}, {2,3}, {2,4}, {3,4}, {1,2,3}, {1,2,4}, {1,3,4}, {2,3,4}, {1,2,3,4}
         Total: 2^n
@@ -66,3 +71,24 @@ Notes:
     5. Subset: Subsequence that do not preserve order (both 1,3 and 3,1 are valid)
     6. BST: inorder traversal is sorted, log N search
 
+
+Graphs
+    - directed, undirected, weighted, unweighted, connected, disconnected, sparse, dense
+    - Adjacency Matrix
+        - 2D array of vertices (V x V)
+        - matrix[i,j] = 1 if there is edge between i and j (other numbers if weighted)
+        - O(V^2) space
+    - Adjacency List
+        - list of vertices, where vertices store list of neighbours
+        - 0 -> 1, 3
+          1 -> 0, 2
+        - O(V+E) space
+    - Both use vector<vector<int>>
+    - Degree :- number of edges connected to a node (indegree & outdegree)
+    - Path, Cycle
+    - Graph with connected and acyclic
+    - Maximum Edges
+        - undirected :- V * (V - 1) / 2
+        - directed :- V * (V - 1)
+    - Sparse graph - E << V^2  or  (E ~ V)
+    - Dense graph - E ~ V^2

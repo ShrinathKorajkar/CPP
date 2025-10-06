@@ -1,0 +1,37 @@
+
+# Shortest Path Algorithms
+    Dijkstra’s Algorithm    →    Shortest path in weighted graphs (no negative weights).
+    Bellman-Ford Algorithm  →    Handles negative weights, detects negative cycles.
+    Floyd-Warshall Algorithm    →    All-pairs shortest path (dynamic programming).
+    Johnson’s Algorithm     →    All-pairs shortest path with negative weights (more efficient).
+    BFS (0-1 BFS)   →    If edges have weights 0 or 1, we can optimize with deque.
+
+# Minimum Spanning Tree (MST)
+    Kruskal’s Algorithm     →    Greedy, uses Disjoint Set (Union-Find).
+    Prim’s Algorithm    →    Greedy, grows MST from a starting node.
+
+# Topological Sorting (Directed Acyclic Graphs, DAGs)
+    Kahn’s Algorithm (BFS-based)
+    DFS-based Topological Sort
+
+# Connectivity & Components
+    Union-Find / Disjoint Set Union (DSU/UFDS)  →    Connected components, Kruskal’s.
+    Kosaraju’s Algorithm    →    Strongly Connected Components (SCC) in directed graphs.
+    Tarjan’s Algorithm  →    SCCs or articulation points (bridges).
+    Bridge Finding Algorithm    →    Finds critical edges whose removal disconnects graph.
+
+# Flow Algorithms
+    Ford-Fulkerson Method (using DFS)
+    Edmonds-Karp Algorithm (using BFS, O(VE²))
+    Dinic’s Algorithm (faster max flow, O(V²E))
+    Push-Relabel Algorithm
+
+# Matching & Covering
+    Hungarian Algorithm     →    Bipartite matching / assignment problem.
+    Hopcroft-Karp Algorithm     →    Maximum bipartite matching.
+
+# Special Graph Algorithms
+    Eulerian Path / Circuit (Hierholzer’s Algorithm)    →    Path visiting all edges exactly once.
+    Hamiltonian Path / Cycle (NP-complete)  →    Visits all vertices once.
+    A Algorithm*    →    Shortest path with heuristics (AI/Maps).
+    PageRank (Google Search)    →    Uses graph theory on web links.
