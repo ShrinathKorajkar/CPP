@@ -64,6 +64,7 @@ int main()
     base1.name();
     base2->name();
 
+    // Dynamic binding
     Base *derived = new Derived();
     derived->name();
 

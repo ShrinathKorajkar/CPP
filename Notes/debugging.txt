@@ -486,8 +486,11 @@
         c. Test Fixtures
             - class Test                :- base class for test fixtures
             - class TestWithParam<T>
-            - SetUp()
+            - SetUp()   :- runs before each test case
+            - static void SetUpTestSuite() :- runs once per test suite
             - TearDown()
+            - TearDownTestSuite()
+            - constructor runs before setup
         
         d. Test discovery and registration
             - INSTANTIATE_TEST_SUITE_P(prefix, generator, values)

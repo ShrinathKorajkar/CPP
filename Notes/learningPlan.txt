@@ -1,0 +1,193 @@
+Core C++ (11/14/17/20): 
+    Templates,
+    STL,
+    smart pointers,
+    RAII,
+    move semantics,
+    lambdas,
+OS & Systems Concepts: 
+    Multithreading,
+    synchronization,
+    memory allocation,
+    debugging.
+DSA + Problem Solving: 
+    Ability to solve LeetCode/Codeforces-style problems in interviews.
+Design & Patterns: 
+    OOP,
+    SOLID,
+    design patterns,
+    clean code principles.
+Domain Knowledge (Bonus): 
+    Networking (TCP/IP),
+    Linux internals,
+    embedded/firmware,
+    security (SCEP,smart card auth) — you already have these.
+Tools: 
+    Git,
+    CMake,
+    GTest,
+    debugging tools (GDB, Valgrind).
+
+## Product Companies in India
+    Adobe               — High compensation (avg ₹22 LPA) and creative culture 
+    Microsoft (India)   — Avg ₹20 LPA; known for flexible, growth-focused culture 
+    Intel               — Avg ₹20 LPA; strong hardware/R&D environment 
+    Cisco               — Among top payers 
+    Google India        — Avg ₹15–40 LPA; “world-class” culture 
+    LinkedIn            — Avg ₹15–35 LPA; collaborative and well resourced 
+    VMware              — Avg ₹12–25 LPA; known for flexibility & growth 
+    Amazon India        — Avg ₹10–28 LPA; fast-paced product environment 
+    Paytm               — Avg ₹8–22 LPA; startup-esque perks with scale 
+    Flipkart            — Avg ₹8–25 LPA; product-oriented and high scale 
+    Qualcomm India      — Semiconductor/product-focused; high pay 
+    Epicor Software     — Product Developer pay ₹14.5–20.7 LPA 
+    BMC Software        — Product Developer pay ₹14.2–19.5 LPA 
+    Postman             — Strong culture, open-source contributions 
+    BrowserStack        — Open-source contributor; friendly environment 
+    Intuit              — Highly rated in Reddit lists for pay/culture 
+    Nutanix             — Same positive mentions 
+    Nvidia              — Great culture, high pay 
+    Citrix              — Good WLB & pay 
+
+## Others India
+    LSEG
+    Best Buy GCC
+    Mistral
+    Quorum
+    SmartBear
+    Samsung
+    Sandisk
+    
+    CitiusTech
+    Cyient
+    Razorpay
+    Zomato
+    ThoughtWorks
+    Druva
+    Dream11
+    Nykaa
+    CleverTap
+    Ping
+    Flextrade
+    Philips
+
+## WFH C++
+    Google
+    Bloomberg
+    NVIDIA
+    Epic Games
+    Palantir
+    Citadel Securities
+    Tata Elxsi (India)
+    HCLTech (India)
+    Infosys (India)
+    Persistent Systems (India)
+    InMobi (India)
+    L&T Technology Services (India)
+    Zapier - 100% remote
+    Doist
+    Buffer
+    Affirm
+    Coinbase
+    SafetyWing
+    Gravity Well
+
+Siddharth Sekhar - serving notice
+
+## 12-Week Action Plan
+    Week 1: Foundation Setup
+        Update resume with ATS-friendly format + metrics.
+        Optimize LinkedIn headline & About section with C++ keywords.
+        Turn on “Open to Work”.
+        Revise C++11/14 basics (STL, OOP, smart pointers, RAII).
+        Start LeetCode Easy (arrays, strings, hashmaps).
+        Shortlist 30 companies (product + remote).
+        Upload Food Recommendation + Elevator project properly on GitHub with README.
+
+    Week 2: Resume Targeting
+        Tailor resume keywords for 3 sample JDs.
+        Add your projects to LinkedIn “Projects” section.
+        LeetCode Easy → 15 Qs (sliding window, two pointers, stacks).
+        Apply to 5 roles (direct company portals).
+        Connect with 10 recruiters on LinkedIn.
+        Write LinkedIn post: “How I reduced firmware size by 30%”.
+
+    Week 3: Building Momentum
+        Ask 2 colleagues/mentors for LinkedIn endorsements.
+        LeetCode Medium → 10 Qs (binary search, linked lists).
+        C++ practice → Implement thread pool, mutex vs semaphore example.
+        Apply to 5 more roles (LinkedIn Jobs, Wellfound).
+        Send resume to 2 recruiters you connected last  week.
+        Add README improvements + commit history to GitHub.
+    Week 4: Mock Interview Start
+        define resume summary with results (e.g., “Reduced boot time by 30%”).
+        Mock interview (friend or Pramp).
+        LeetCode Medium → 10 Qs (trees, recursion).
+        Apply to 5 more roles.
+        Request referrals from ex-colleagues.
+        LinkedIn post: “5 multithreading pitfalls in C++ I learned on real projects”.
+
+    Week 5: Expanding Reach
+        Update “Skills” to match top JDs (C++17, Linux internals, TCP/IP).
+        LeetCode Medium → 12 Qs (graphs, BFS/DFS).
+        Revise design patterns (Singleton, Observer, Factory).
+        Apply to 7 roles (NVIDIA, Intel, Adobe, Qualcomm).
+        Message 5 recruiters with your resume.
+        Contribute small PR to open-source C++ repo (Boost/Qt).
+
+    Week 6: First Wave of Calls
+        Add GitHub contributions in LinkedIn “Featured” section.
+        LeetCode Hard → 5 Qs (DP, backtracking).
+        Implement custom memory allocator in C++.
+        Apply to 5 more roles.
+        Follow up with earlier recruiters.
+        LinkedIn post: “How I built an elevator simulation system using multithreading”.
+
+    Week 7: Strengthening Profile
+        Ask manager/peer for LinkedIn recommendation.
+        LeetCode Medium/Hard mix (10 Qs).
+        Practice GDB debugging and memory leak fixes.
+        Apply to 5–7 new roles (remote/global like Bloomberg, Palantir).
+        Connect with 5 engineers in target companies.
+        Add blog/README on GitHub explaining your project architecture.
+
+    Week 8: Mock Rounds Intensify
+        Polish resume for global roles (mention TCP/IP, protocols, Linux).
+        2 timed mock contests (LeetCode/InterviewBit).
+        Revise threading concepts (deadlocks, race conditions, semaphores).
+        Apply to 5–8 more roles.
+        Ask 2 LinkedIn connections for referral.
+        Share LinkedIn post on design patterns in real projects.
+
+    Week 9: Technical Depth
+        Add any new certification (e.g., NPTEL DSA already there).
+        Focus on System Design Lite (cache, producer–consumer, thread pool).
+        Solve 10 Medium/Hard LeetCode.
+        Apply to 5–7 roles (target NVIDIA, Citrix, Epic Games).
+        Message 3 recruiters globally.
+        Contribute to open-source again (even small bug fix).
+
+    Week 10: Interview Ready
+        Update “Headline” with Actively Looking.
+        Full mock interview (DSA + C++ concepts).
+        Revise networking (TCP vs UDP, SSL/TLS basics).
+        Apply to 5–6 roles.
+        Start tracking interview callbacks.
+        LinkedIn post: “Why C++17/20 features matter in modern systems programming”.
+
+    Week 11: Fine-Tuning
+        Highlight leadership (mentoring interns, code reviews).
+        Revise top 50 LeetCode problems.
+        Practice 2 system design mock sessions.
+        Apply to 5–7 roles.
+        Follow up with past applications (email/LinkedIn).
+        Post GitHub update on SCEP/Smart Card Auth project learnings.
+
+    Week 12: Launch Week
+        Final polish, keep multiple versions (embedded, backend, system).
+        Light revision: focus on weak topics.
+        One last mock interview.
+        Apply to 10 high-priority roles (FAANG/GCC/product).
+        Schedule interviews with recruiters you connected.
+        Share a post: “2 years in C++ systems programming: key learnings”.
+        

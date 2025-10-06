@@ -60,6 +60,5 @@ TEST(MathOperations, Nothing)
         },
         ".*null pointer.*");
 
-    EXPECT_DEATH({ int result = 1 / 0; },
-                 ".*division by zero.*");
+    EXPECT_DEATH({ int result = 1 / 0; }, ".*division by zero.*");
 }

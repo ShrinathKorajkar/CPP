@@ -6,6 +6,7 @@ int main()
     int a = 5;
     int b = 10;
 
+    // C++20
     // auto result = a <=> b;
 
     // if (result == 0)

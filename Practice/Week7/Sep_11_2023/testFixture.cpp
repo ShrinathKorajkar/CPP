@@ -4,10 +4,12 @@
     Fixture Base classes:
     ::testing::Test
     ::testing::TestWithParam<T>
+    ::testing::Environment
+
+    # Never tested below fixtures - might not exists
     ::testing::TestWithParamAndFixture<T>
     ::testing::TestSuite
     ::testing::TestSuiteWithParams
-    ::testing::Environment
     ::testing::EnvironmentWithParam<T>
     ::testing::EmptyTestEventListener
     ::testing::SetUpTestSuite
