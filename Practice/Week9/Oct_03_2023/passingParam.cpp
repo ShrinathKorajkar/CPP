@@ -14,6 +14,10 @@ int main()
     int param1 = 40;
     std::string param2 = "Shri";
     std::future<int> futureResult = std::async(std::launch::async, threadFunction, param1, param2);
+    // std::launch::defered -> run lazily, only when future.get() is called
+    // std::launch::aync -> always run in new thread.
+    // future cannot be copied only moved
+    // std::promise -> way to manually set a value in std::future -> promise is producer, future is consumer
 
     // std::thread thread1(threadFunction, param1, param2);
 

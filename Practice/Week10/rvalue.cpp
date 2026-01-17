@@ -32,7 +32,7 @@ int main()
 {
     int x = 42;
     process(52);
-    process(std::move(x));
+    process(std::move(x)); // doesn't move anything, simply casts value to rvalue reference, it calls move constructor which can move data
     std::cout << "x after processing : " << x << std::endl;
     forwarder(std::move(x));
     std::cout << "x after processing : " << x << std::endl;

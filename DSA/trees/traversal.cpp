@@ -85,6 +85,27 @@ std::vector<int> printLevelOrder(Tree *root)
     return levelOrder;
 }
 
+// One more level order traversal using preorder
+std::vector<std::vector<int>> ret;
+
+void buildVector(Tree *root, int depth)
+{
+    if (root == NULL)
+        return;
+    if (ret.size() == depth)
+        ret.push_back(std::vector<int>());
+
+    ret[depth].push_back(root->data);
+    buildVector(root->left, depth + 1);
+    buildVector(root->right, depth + 1);
+}
+
+std::vector<std::vector<int>> levelOrder(Tree *root)
+{
+    buildVector(root, 0);
+    return ret;
+}
+
 int main()
 {
     std::vector<int> treeElements = {1, 2, -1, -1, 3, 4, -1, -1, -1};

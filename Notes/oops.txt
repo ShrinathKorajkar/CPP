@@ -22,6 +22,7 @@
     18. Lazy Evaluation  ->  compiler won't validate implementation of member functions until it's necessary(obj created)
     19. Encapsulation -> data, get, set, compute data.       Abstraction -> wheel, break, accelator
     20. Prefer "has-a" over "is-a" unless the subclass truly extends base behavior. (composition over inheritance)
+    21. Aoid interface that just force action -> using interface just to force the creation of a method is bad
 
 
 ## CLASSES AND OBJECTS
@@ -93,9 +94,11 @@
         If it’s not marked noexcept, containers might fall back to copying to maintain strong exception safety guarantees.
         The standard library uses std::is_nothrow_move_constructible<T> to check
 
-    10. Destructor =>  automatically called when obj goes out of scope, perform cleanup, deallocate, release resource
+    18. Destructor =>  automatically called when obj goes out of scope, perform cleanup, deallocate, release resource
         - default destructor does not have body
         - except exit() and abort() every time they will be called
+    19. If you declare a move constructor or move assignment operator, the compiler will delete implicit copy const and operator.
+        // Rule of 5 -> test b = a; // Should this copy or move? if not defined.
 
 
 ## This keyword
@@ -294,7 +297,7 @@
         d. operator overloading
             - can be overloaded with only user-defined types no built-in types
             - Types - member func, non-member func(global)
-            - for non-member parameters should be public, atleast one param should be userdefined
+            - for non-member, parameters should be public, atleast one param should be userdefined
             - operators we cannot overload               ->   ::  .  ?:  sizeof  .*  &
             - operators must be overloaded inside class  ->   ->  =  ()[]  A()
             - if we want to overload operators globally  ->   use friend functions
@@ -424,11 +427,12 @@
     1. Function Templates
         a. act as a placeholder :- template <typename T>
         b. type deduction :- to determine actual data types.
-        c. template instantiaion :- generate actual code
-        c. explicit instantiaion => template float add<float>(float, float);
+        c. template instantiation :- generate actual code
+        c. explicit instantiation => template float add<float>(float, float);
         d. code bloating :- unnecessary, long, slow not useful
         e. specific and generated for each translation unit. at linking deduplication happens
         f. Non-Type are constant and cannot be modified.
+        g. we can use class instead of typename, both are same. Class came first C++98
 
     2. Class Templates
         a. generic templates
@@ -437,10 +441,15 @@
         d. different templates for member functions
         e. static members cannot be template type. must be specific
     
-    3. Variadic Templates
+    3. Variadic Templates (C++11)
         a. zero or more arguments => template <typename... Args>
         b. ((std::cout << arg << " " ), ...)  =>  expansion
         c. recursion
+        d. Fold Expressions (C++17)
+            - template <typename... Args>
+              auto sum(Args... args){
+                return (args + ...) // fold expression
+              }
     
     4. Template Metaprogramming
         a. technique used to perform computations at compile time.
@@ -505,6 +514,13 @@
         f. Thread local storage :-  unique instance per thread
         g. 4 different ways of creating thread :- funcPtr, lambda, functor, memFunc
         h. condition_variable can work only with unique_lock, cv_any can work with all locks
+        i. condition_variable::wait() must unlock and re-lock the mutex internally, and only unique_lock supports unlocking/relocking—lock_guard does not.
+        j. cv.wait(lock); -> unlock mutex -> put thread to sleep -> wakeup and relock before returning. Unlocking so that other threads modify shared data.
+        k. If the std::thread object goes out of scope while still joinable, C++ will call std::terminate().
+        l. in detach() -> std::thread releases ownership of thread handle -> controlled by OS, clean up automatically
+        m. A detached thread becomes dangerous when it refers to :- local variables, objects that may get destroyed, references that go out of scope, pointers that become invalid
+        n. std::jthread -> C++20, auto joins
+        o. A cpu has multi cores, each core runs a thread independently, reducing context switching
     
     2. std::thread
         a. <thread>
@@ -532,10 +548,10 @@
         d. Locking
             - std::unique_lock()  :-  flexible conditional locking and manual unlocking
             - std::lock_guard()   :-  simple lock acquire mutex at construction and release at destruction
-            - std::scoped_lock()  :-  c++ 17, locks all locks in deadlock free manner, guarantees all locks are acquired or none are
+            - std::scoped_lock()  :-  c++ 17, locks all locks in deadlock free manner, guarantees all locks are acquired or none are, blocks until all mtx acquired
             - std::recursive_mutex :-  allow same thread to lock it multiple times w/o causing deadlock
             - std::timed_mutex    :-  provide ability to attempt locking with a specified timeout. if cannot then return and continue work
-            - std::shared_lock()  :-  allow muti threads to read shared resource. c++ 17, std::shared_mutex
+            - std::shared_lock()  :-  c++ 17, allow muti threads to read shared resource. works only with std::shared_mutex
 
     3. POSIX thread
         a. <pthread>

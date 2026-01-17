@@ -1,0 +1,165 @@
+🔷 OOP in C# (Very High Priority)
+Core OOP
+Difference between class vs struct vs record
+Reference types vs value types (memory + performance)
+What is boxing / unboxing?
+How does inheritance work in C# internally?
+Why multiple inheritance is not supported (and how interfaces solve it)
+virtual, override, abstract, sealed
+Difference between virtual, abstract, override, new
+When to use sealed methods/classes?
+Virtual call overhead in C#
+Can constructors be virtual? (Why not)
+static
+Static class vs instance class
+Static constructor – when is it called?
+Thread-safety of static members
+Singleton vs static class
+Constructors / Finalizers
+Constructor chaining
+Private constructors (use cases)
+Finalizers (~ClassName) vs IDisposable
+Why finalizers are discouraged?
+Deep vs Shallow Copy
+What does MemberwiseClone() do?
+How to implement deep copy?
+Difference between copy constructor vs ICloneable
+Immutable objects and copying
+Operator Overloading
+Which operators can be overloaded?
+Pre/post increment behavior in C#
+Why operator overloading is rare in business apps
+Overloading == and Equals together (very important)
+🔷 Generics (C# equivalent of Templates)
+Generics Basics
+Generics vs non-generics (type safety + performance)
+Generic methods vs generic classes
+Constraints
+where T : class
+where T : struct
+where T : new()
+Why constraints matter
+Covariance / Contravariance
+out and in keywords
+Why IEnumerable<T> is covariant
+Why List<T> is invariant
+Runtime vs Compile-time
+Why generics are reified in .NET (unlike Java)
+How CLR handles generic instantiation
+🔷 Collections (STL equivalent)
+Collection Types (Must Know)
+List<T> vs Array
+Dictionary<TKey,TValue> vs ConcurrentDictionary
+HashSet<T>
+Queue<T>, Stack<T>
+Span<T> / Memory<T> (advanced, high-value)
+Internal Working (Frequently Asked)
+List<T> resizing strategy
+Dictionary hashing + collision handling
+Why dictionary lookup is O(1) average
+Why ConcurrentDictionary is slower than Dictionary
+Enumerators & Iterators
+Why IEnumerable<T> exists
+Deferred execution
+What happens when you enumerate twice?
+🔷 LINQ (Very Important)
+IEnumerable vs IQueryable
+Deferred vs immediate execution
+Select vs SelectMany
+First vs FirstOrDefault
+Performance pitfalls of LINQ
+Why LINQ can hide bugs
+🔷 Memory Management & GC (CRITICAL)
+Garbage Collector
+How GC works in .NET (high-level)
+Generations (Gen 0, 1, 2)
+Large Object Heap (LOH)
+What causes GC pressure?
+IDisposable & RAII equivalent
+Why using exists
+Dispose vs Finalizer
+When to implement IDisposable
+Common memory leak patterns in C#
+🔷 Multithreading & Async (VERY HIGH PRIORITY)
+Threads & Tasks
+Thread vs Task
+Thread pool
+When NOT to create threads manually
+Async / Await
+How async/await works internally
+What is a SynchronizationContext?
+async void vs async Task
+Deadlocks caused by .Result / .Wait()
+Locks & Synchronization
+lock keyword (Monitor)
+Mutex vs SemaphoreSlim
+ReaderWriterLockSlim
+SpinLock – when to use?
+Thread Safety
+Immutable objects
+Thread-safe collections
+Double-checked locking
+Volatile keyword
+Race Conditions & Deadlocks
+Common deadlock scenarios
+How to avoid deadlocks
+Producer–Consumer pattern in C#
+🔷 SOLID Principles (Very Common)
+Single Responsibility Principle (SRP)
+Open–Closed Principle (OCP)
+Liskov Substitution Principle (LSP)
+Interface Segregation Principle (ISP)
+Dependency Inversion Principle (DIP)
+Expect:
+👉 “Which SOLID principles did you apply in your project?”
+🔷 Design Patterns (Extremely Important)
+MUST KNOW (Same as your C++ list)
+Singleton (thread-safe versions)
+Factory / Abstract Factory
+Strategy
+Observer (events, delegates)
+Adapter
+Builder
+.NET-specific angle
+How DI frameworks implement Factory
+Why Singleton is often discouraged
+Events as Observer pattern
+🔷 .NET Runtime & Architecture (Interview Favorite)
+CLR vs CTS vs CLS
+JIT vs AOT
+Assembly loading
+Strong-named assemblies
+AppDomain (legacy vs modern .NET)
+🔷 ASP.NET / Backend (If applicable)
+ASP.NET Core request pipeline
+Middleware
+Dependency Injection lifetime:
+Singleton
+Scoped
+Transient
+Model binding
+Filters vs Middleware
+🔷 Tooling & Ecosystem
+Git
+Rebase vs merge
+Cherry-pick
+Resolving conflicts
+Gitflow basics
+Build & Deployment
+dotnet build, dotnet publish
+MSBuild basics
+NuGet package management
+Versioning
+Testing
+Unit testing frameworks (xUnit, NUnit)
+Mocking (Moq)
+Why dependency injection helps testing
+Docker
+Dockerfile for .NET app
+Multi-stage builds
+Container vs VM
+Debugging
+Visual Studio debugger
+Breakpoints, watch, call stack
+Memory dump analysis (basic idea)
+Logging vs debugging

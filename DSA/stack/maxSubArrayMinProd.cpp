@@ -7,6 +7,11 @@ The min-product of an array is equal to the minimum value in the array multiplie
 
 For example, the array [3,2,5] (minimum value is 2) has a min-product of 2 * (3+2+5) = 2 * 10 = 20.
 Given an array of integers nums, return the maximum min-product of any non-empty subarray of nums.
+
+Approach -
+    Each element is treated as the minimum of some subarray
+    For that element:
+    Find the largest subarray where it is the minimum
 */
 
 int maxSumMinProduct(std::vector<int> &nums)

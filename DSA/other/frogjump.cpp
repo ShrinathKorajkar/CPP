@@ -9,7 +9,6 @@ int lvl[N];
 
 void bfs(int u)
 {
-
     queue<int> q;
     lvl[u] = 0, vis[u] = 1;
     q.push(u);

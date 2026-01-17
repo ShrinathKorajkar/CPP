@@ -2,6 +2,10 @@
 #include <vector>
 #include <algorithm>
 
+/*
+    merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+*/
+
 std::vector<std::vector<int>> merge(std::vector<std::vector<int>> &intervals)
 {
     std::vector<std::vector<int>> ans;

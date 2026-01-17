@@ -5,6 +5,10 @@
     Builder Pattern  ->  Separates the construction of a complex object from its representation,
     allowing the same construction process to create different representations. This is useful
     when an object has a large number of possible configurations.
+
+    Lets construct complex object step by step
+
+    Applications - network packer builder, database query builder, game char creation, protocol builders
 */
 
 // Product class representing a computer

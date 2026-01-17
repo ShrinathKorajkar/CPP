@@ -1,6 +1,11 @@
 /*
     Decorator Pattern  ->  Attaches additional responsibilities to an object dynamically.
     Decorators provide a flexible alternative to subclassing for extending functionality.
+
+    Allows to add new behavious to an object dynamically, without modifying its class.
+    It wraps an object inside another object that adds functionality.
+
+    Add features at runtime -> filters in image/audio, encryption, compression, wrapping http req
 */
 
 #include <iostream>

@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
+/*
+    2D integer matrix grid of size n * n with values in the range [1, n^2]
+*/
 vector<int> findMissingAndRepeatedValues(vector<vector<int>> &grid)
 {
     int gridLen = grid.size();

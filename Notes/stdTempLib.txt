@@ -17,6 +17,11 @@
     l. Iterator Hierarchy
         - random access  ->  bidirectional  ->  forward  ->  input and output
         - stack, queue, pq  ->  no iterator support
+    m. For simple types(int,double,std::string) or when passing rvalue -> push_back and emplace_back will behave same
+       push_back({name,age}) -> create obj and call move const
+       emplace_back(name, age) -> create obj directly in mem -> only const is called
+    n. std::sort() -> quicksort, heapsort, insersion sort -> quick, if recusrive depth more heap, insertion for small range
+    o. Iterators let algo work with all containers in unified way, without knowing internal structure, zero cost abstraction
 
 
 ## CONTAINERS
@@ -89,10 +94,10 @@
             - reverse()         sort()          swap()          
             - push_back(),      pop_back(),     push_front()    pop_front()
             
-            - splice()          :-  move elements from same or diff list
-              splice(itrPos, other)
-              splice(itrPos, other, itr)
-              splice(itrPos, other, itrBeg, itrEnd)
+            - splice()                                  :-  move elements from same or diff list
+              splice(itrPos, other)                     :-  move entire other list into itrPos
+              splice(itrPos, other, otheritrPos)        :-  move one element from otherItrPos present in other to current itrPos
+              splice(itrPos, other, otheritrBeg, otheritrEnd)     :-  move range of other elements into current
 
             - remove(value)     :-  remove element with specific value
             - remove_if(pred)   :-  remove element based on predicate
@@ -138,6 +143,8 @@
             - push()                 pop()                    top()             empty()
             - size()
         e. Sequence containers ->  vector(default), deque, array (random access [], <)
+        f. Adaptor container uses vector by default to store elements
+        g. Default it is max heap
 
     8. Array
         a. std::array<int, size> array;
@@ -189,6 +196,7 @@
         a. associative container, permits duplicate values, sorted order (std::less)
         b. complexity = log n
         c. std::multiset<>
+        d. Associative containers -> their elements are associated with keys
 
     12. hetrogenous
         a. <any>    <variant>
@@ -310,13 +318,13 @@
 
 ## ALGORITHMS   
     1. Sorting Algorithms
-        - std::sort(cont1, cont2)   :-     vector, array, deque    (container with random access)
-        - std::stable_sort()
-        - std::partial_sort()
+        - std::sort(cont1, cont2)   :-     vector, array, deque    (container with random access), introsort(quick + heap + insertion)
+        - std::stable_sort()        :-     keep original order of same elements (Merge sort)
+        - std::partial_sort()       :-     Sorts only k elements    (heap sort, not stable)
         - std::is_sorted_until()
         - std::is_sorted()
         - make_heap(), heap_sort()  :-     vector, array
-        - container.sort()          :-     list, forward_list
+        - container.sort()          :-     list, forward_list       (merge sort)
         - already sorted            :-     set, map, priority_queue
         - sort by conversion        :-     stack, queue, unord set, unord map      (convert into vector and sort)
         - Introsort                 :-     quick, heap, insertion mixture
@@ -598,6 +606,7 @@
             - avail for unique
             - transfer ownership to caller
             - no param
+        h. unique_ptr<> can be casted into shared usigng std::move() but not wise versa
 
 
 ## Time complexity

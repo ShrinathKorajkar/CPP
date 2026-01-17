@@ -1,109 +1,91 @@
 /*
     Command Pattern:  ->  Encapsulates a request as an object, thereby allowing for parameterization
     of clients with queues, requests, and operations.
+
+    The request object can be used to store, queue, undo/redo, log
+    encapsulate action + receiver of the action => command
+    Instead of calling function directly -> wrap the fun call into a command object
+    decouple obj that issue req from obj that perform req
+
+    Application - undo/redo, queue or schedule operations, GUI -> each button is command
+    You want to issue requests, but you don’t want callers to know HOW they are executed
 */
 #include <iostream>
+#include <memory>
 
-// Forward declaration of LightReceiver class
-class LightReceiver;
+// Receiver -> actual doing work
+class Light
+{
+public:
+    void on() { std::cout << "Light ON\n"; }
+    void off() { std::cout << "Light OFF\n"; }
+};
 
-// Command interface
 class Command
 {
 public:
     virtual void execute() = 0;
-    virtual ~Command() {}
+    virtual void undo() = 0; // optional
+    virtual ~Command() = default;
 };
 
-// ConcreteCommand 1: Light On Command
 class LightOnCommand : public Command
 {
-public:
-    LightOnCommand(LightReceiver *light);
-    void execute() override;
+    Light &light;
 
-private:
-    LightReceiver *light_;
+public:
+    LightOnCommand(Light &l) : light(l) {}
+
+    void execute() override { light.on(); }
+    void undo() override { light.off(); }
 };
 
-// ConcreteCommand 2: Light Off Command
 class LightOffCommand : public Command
 {
+    Light &light;
+
 public:
-    LightOffCommand(LightReceiver *light);
-    void execute() override;
+    LightOffCommand(Light &l) : light(l) {}
 
-private:
-    LightReceiver *light_;
+    void execute() override { light.off(); }
+    void undo() override { light.on(); }
 };
-
-// Receiver
-class LightReceiver
-{
-public:
-    void turnOn()
-    {
-        std::cout << "Light is on" << std::endl;
-    }
-
-    void turnOff()
-    {
-        std::cout << "Light is off" << std::endl;
-    }
-};
-
-// Implementations of ConcreteCommand constructors
-LightOnCommand::LightOnCommand(LightReceiver *light) : light_(light) {}
-LightOffCommand::LightOffCommand(LightReceiver *light) : light_(light) {}
-
-// Implementations of ConcreteCommand execute methods
-void LightOnCommand::execute()
-{
-    light_->turnOn();
-}
-
-void LightOffCommand::execute()
-{
-    light_->turnOff();
-}
 
 // Invoker
 class RemoteControl
 {
+    std::unique_ptr<Command> command;
+
 public:
-    void setCommand(Command *command)
+    void setCommand(std::unique_ptr<Command> cmd)
     {
-        command_ = command;
+        command = std::move(cmd);
     }
 
     void pressButton()
     {
-        command_->execute();
+        if (command)
+            command->execute();
     }
 
-private:
-    Command *command_;
+    void pressUndo()
+    {
+        if (command)
+            command->undo();
+    }
 };
 
 int main()
 {
-    // Create a receiver
-    LightReceiver light;
+    Light livingRoomLight;
 
-    // Create concrete command objects
-    LightOnCommand onCommand(&light);
-    LightOffCommand offCommand(&light);
-
-    // Create an invoker and set the command
     RemoteControl remote;
-    remote.setCommand(&onCommand);
 
-    // Press the button to turn on the light
-    remote.pressButton();
+    remote.setCommand(std::make_unique<LightOnCommand>(livingRoomLight));
+    remote.pressButton(); // Light ON
+    remote.pressUndo();   // Light OFF
 
-    // Change the command and press the button again to turn off the light
-    remote.setCommand(&offCommand);
-    remote.pressButton();
-
-    return 0;
+    remote.setCommand(std::make_unique<LightOffCommand>(livingRoomLight));
+    remote.pressButton(); // Light OFF
+    remote.pressUndo();   // Light ON
 }

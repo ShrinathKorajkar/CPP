@@ -11,50 +11,23 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-bool helper2(TreeNode *root, TreeNode *minNode, TreeNode *maxNode)
+bool helper(TreeNode *root, long long low, long long high)
 {
-    if (root == nullptr)
+    if (!root)
     {
         return true;
     }
 
-    if (minNode != nullptr && minNode->val >= root->val)
+    if (root->val <= low || root->val >= high)
     {
         return false;
     }
 
-    if (maxNode != nullptr && maxNode->val <= root->val)
-    {
-        return false;
-    }
-
-    return helper2(root->left, minNode, root) && helper2(root->right, root, maxNode);
-}
-
-// Not working in leatcode
-bool helper(TreeNode *root, std::vector<int> &inorder, int &idx)
-{
-    if (root == nullptr)
-    {
-        return true;
-    }
-
-    bool left = helper(root->left, inorder, idx);
-    if (left == false || inorder[idx - 1] >= root->val && root->val != INT_MIN)
-    {
-        return false;
-    }
-
-    inorder.push_back(root->val);
-    idx++;
-
-    return helper(root->right, inorder, idx);
+    return helper(root->left, low, root->val) &&
+           helper(root->right, root->val, high);
 }
 
 bool isValidBST(TreeNode *root)
 {
-    std::vector<int> inorder;
-    inorder.push_back(INT_MIN);
-    int index = 1;
-    return helper(root, inorder, index);
+    return helper(root, LLONG_MIN, LLONG_MAX);
 }

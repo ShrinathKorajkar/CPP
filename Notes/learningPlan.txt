@@ -1,32 +1,109 @@
-Core C++ (11/14/17/20): 
-    Templates,
-    STL,
-    smart pointers,
-    RAII,
-    move semantics,
-    lambdas,
-OS & Systems Concepts: 
-    Multithreading,
-    synchronization,
-    memory allocation,
-    debugging.
-DSA + Problem Solving: 
-    Ability to solve LeetCode/Codeforces-style problems in interviews.
-Design & Patterns: 
-    OOP,
+# Topics    
+    OOP - rule of 0/3/5, virtual keyword, static, deep vs shallow copy, constructor/destructor, how inheritance happens at memory level, operator overloading - (++pre, post++, new, delete, <<, [], (), conversion operator)
+    Templates - function vs class templates, template specialization, compilation model, typename vs class, SFINAE
+    STL - container types, all methods they provide, why iterators exist, internal working for - priority_queue, vector, map, unordered_map, deque. functors vs lambdas.
+    C++11 - smart pointers, move semantics, lambdas, RAII.
+    Multithreading :- join vs detach, lock_guard vs unique_lock, atomic, mutex, condition variable, thread-safe design, semaphore, deadlocks, race conditions, produce-consumer problems, and how to solve these. type of locks - implement your own custom version of these. Async, future, promise
     SOLID,
-    design patterns,
-    clean code principles.
-Domain Knowledge (Bonus): 
-    Networking (TCP/IP),
-    Linux internals,
-    embedded/firmware,
-    security (SCEP,smart card auth) — you already have these.
-Tools: 
+    design patterns - Singleton, Factory, Strategy, Observer, Adapter, Builder (MUST KNOW - Very High Usage, Almost Every Project)
+    thread/process synchronization basics,
+    memory allocation,
     Git,
     CMake,
     GTest,
-    debugging tools (GDB, Valgrind).
+    debugging tools (GDB, Valgrind, internal working of these).
+    domain Knowledge - Networking, OS, File system, Linux system programming, optimisations, protocols etc.
+    Most commonly used in DSA :- sort,find,accumulate,transform,min,max,swap,min_element,max_element,fill,replace,to_string,stoi,splice, time/space complexity, custom comparator in sort
+
+Sri Siva Balaji PG for Gents, #76, 36th Main Road, Dollar Scheme Colony, 1st Stage BTM, Bengaluru -
+5600068
+
+## Job Search Filters
+   C++ Linux Developer
+   C++ Systems Engineer
+   Backend C++ Engineer
+   Low Latency C++
+   Platform Engineer C++
+
+   Template:
+   Hello Ketan,
+   I recently came across this job profile at your company:- https://www.linkedin.com/jobs/view/4268193835 
+   Can you please refer me for this job role. I have 2.5 YOE in C/C++
+
+   Tier-1 Product Companies
+      Google
+      Amazon (C++ infra roles)
+      Microsoft (Systems / Azure)
+      Nvidia
+      Qualcomm
+      Samsung R&D
+
+   Tier-2 High Pay (Very realistic now)
+      Uber
+      Rubrik
+      Atlassian
+      VMware / Broadcom
+      Nutanix
+      Arista Networks
+      Cisco (core networking teams)
+
+   Fintech / Trading (High C++ Pay)
+      Tower Research
+      Quadeye
+      Graviton
+      Media.net
+      Razorpay (platform roles)
+
+
+## Things to do
+    1. LinkedIn - add posts
+    2. Contribute to open-source C++ repos
+    3. Add those contributions in linkedIn "featured" section
+    4. Implement custom memory allocator in C++
+    5. Add any certifications
+    6. Project protocols and working
+    7. Practice system design mock interviews
+    8. state machines, sync vs aync event handling, secure storage
+
+
+## LinkedIn topics  
+    1. 5 multithreading pitfalls in C++ I learned on real projects
+    2. Design patterns in real projects
+    3. Advanced C++ concepts in modern systems programming
+    4. 2 years in C++ systems programming: key learnings
+
+
+## DSA - key topics that appear in 90% interviews: 
+    1. Arrays & Strings 
+       - Sliding window 
+       - Two pointers 
+       - Prefix sum 
+       - Hash map frequency counting 
+    2. Linked List 
+       - Reverse list 
+       - Detect cycle 
+       - Middle element 
+       - Merge 2 lists 
+    3. Trees 
+       - BFS, DFS 
+       - Height of tree 
+       - Level order 
+       - Inorder/pre/post traversal 
+    4. Binary Search 
+       - Search in rotated sorted array 
+       - First/last occurrence 
+       - Lower_bound/upper_bound 
+    5. Sorting & Greedy 
+       - Custom comparator 
+       - Interval merging 
+    6. Basic DP (only 2–3 patterns) 
+       - Fibonacci / climbing stairs (memo + tabulation) 
+       - Longest Increasing Subsequence (optional) 
+       - Knapsack (skip if low time) 
+    7. Graph Basics (light) 
+       - BFS shortest path 
+       - cycle detection 
+
 
 ## Product Companies in India
     Adobe               — High compensation (avg ₹22 LPA) and creative culture 
@@ -57,19 +134,18 @@ Tools:
     SmartBear
     Samsung
     Sandisk
-    
     CitiusTech
     Cyient
     Razorpay
-    Zomato
     ThoughtWorks
     Druva
     Dream11
     Nykaa
+    Zomato
     CleverTap
+    Philips
     Ping
     Flextrade
-    Philips
 
 ## WFH C++
     Google
@@ -92,102 +168,75 @@ Tools:
     SafetyWing
     Gravity Well
 
-Siddharth Sekhar - serving notice
 
-## 12-Week Action Plan
-    Week 1: Foundation Setup
-        Update resume with ATS-friendly format + metrics.
-        Optimize LinkedIn headline & About section with C++ keywords.
-        Turn on “Open to Work”.
-        Revise C++11/14 basics (STL, OOP, smart pointers, RAII).
-        Start LeetCode Easy (arrays, strings, hashmaps).
-        Shortlist 30 companies (product + remote).
-        Upload Food Recommendation + Elevator project properly on GitHub with README.
+# Resume
+   C++ / Linux systems engineer with 2.5+ years of experience building 
+   performance-critical, multithreaded firmware and networking systems.
 
-    Week 2: Resume Targeting
-        Tailor resume keywords for 3 sample JDs.
-        Add your projects to LinkedIn “Projects” section.
-        LeetCode Easy → 15 Qs (sliding window, two pointers, stacks).
-        Apply to 5 roles (direct company portals).
-        Connect with 10 recruiters on LinkedIn.
-        Write LinkedIn post: “How I reduced firmware size by 30%”.
+   Currently working on HP Anyware (PCoIP-based remote desktop solutions),
+   developing core protocol features, multi-threaded managers, and system-level
+   optimizations on Linux.
 
-    Week 3: Building Momentum
-        Ask 2 colleagues/mentors for LinkedIn endorsements.
-        LeetCode Medium → 10 Qs (binary search, linked lists).
-        C++ practice → Implement thread pool, mutex vs semaphore example.
-        Apply to 5 more roles (LinkedIn Jobs, Wellfound).
-        Send resume to 2 recruiters you connected last  week.
-        Add README improvements + commit history to GitHub.
-    Week 4: Mock Interview Start
-        define resume summary with results (e.g., “Reduced boot time by 30%”).
-        Mock interview (friend or Pramp).
-        LeetCode Medium → 10 Qs (trees, recursion).
-        Apply to 5 more roles.
-        Request referrals from ex-colleagues.
-        LinkedIn post: “5 multithreading pitfalls in C++ I learned on real projects”.
+   Strong hands-on experience in:
+   • Modern C++ (C++11/14), memory management, RAII, OOPs
+   • Multithreading, synchronization, race condition & deadlock handling
+   • Linux systems programming, debugging (GDB), CMake
+   • Networking protocols (TCP/IP, PCoIP), USB session handling
+   • Security & auth features including SCEP and smart card authentication
 
-    Week 5: Expanding Reach
-        Update “Skills” to match top JDs (C++17, Linux internals, TCP/IP).
-        LeetCode Medium → 12 Qs (graphs, BFS/DFS).
-        Revise design patterns (Singleton, Observer, Factory).
-        Apply to 7 roles (NVIDIA, Intel, Adobe, Qualcomm).
-        Message 5 recruiters with your resume.
-        Contribute small PR to open-source C++ repo (Boost/Qt).
+   Led development of a critical feature that directly contributed to client
+   retention and multi-year contract renewal. Reduced firmware image size by 30%
+   through architectural refactoring, improving boot time and memory efficiency.
 
-    Week 6: First Wave of Calls
-        Add GitHub contributions in LinkedIn “Featured” section.
-        LeetCode Hard → 5 Qs (DP, backtracking).
-        Implement custom memory allocator in C++.
-        Apply to 5 more roles.
-        Follow up with earlier recruiters.
-        LinkedIn post: “How I built an elevator simulation system using multithreading”.
+   Actively exploring strong product teams working on systems, platforms,
+   networking, or low-latency backend infrastructure.
 
-    Week 7: Strengthening Profile
-        Ask manager/peer for LinkedIn recommendation.
-        LeetCode Medium/Hard mix (10 Qs).
-        Practice GDB debugging and memory leak fixes.
-        Apply to 5–7 new roles (remote/global like Bloomberg, Palantir).
-        Connect with 5 engineers in target companies.
-        Add blog/README on GitHub explaining your project architecture.
+   • Worked on HP Anyware (PCoIP-based remote desktop platform) developing
+   performance-critical firmware and system components in C++ on Linux.
+   • Implemented and debugged core PCoIP session protocol features using
+   multi-threaded managers handling concurrent client sessions.
+   • Designed and implemented USB session handling and smart card authentication
+   flows, including SCEP-based certificate operations.
+   • Reduced firmware image size by ~30% by refactoring architecture to separate
+   client and host managers, eliminating redundant legacy components and
+   improving boot time and memory usage.
+   • Led development of a business-critical feature delivered under tight
+   deadlines, directly contributing to client retention and contract renewal.
+   • Wrote unit tests using GTest achieving 85%+ coverage and improving system
+   stability.
+   • Mentored and onboarded junior C++ developers and interns.
 
-    Week 8: Mock Rounds Intensify
-        Polish resume for global roles (mention TCP/IP, protocols, Linux).
-        2 timed mock contests (LeetCode/InterviewBit).
-        Revise threading concepts (deadlocks, race conditions, semaphores).
-        Apply to 5–8 more roles.
-        Ask 2 LinkedIn connections for referral.
-        Share LinkedIn post on design patterns in real projects.
+   Food recommendation engine
+      Designed and built a multithreaded C++ client-server system using sockets and
+      MySQL, implementing role-based access and recommendation logic.
+      Applied SOLID principles, Singleton pattern, serialization/deserialization,
+      and unit testing using GTest.
 
-    Week 9: Technical Depth
-        Add any new certification (e.g., NPTEL DSA already there).
-        Focus on System Design Lite (cache, producer–consumer, thread pool).
-        Solve 10 Medium/Hard LeetCode.
-        Apply to 5–7 roles (target NVIDIA, Citrix, Epic Games).
-        Message 3 recruiters globally.
-        Contribute to open-source again (even small bug fix).
+   Elevator Simulation
+      Developed a real-time multithreaded elevator coordination system in C++,
+      handling concurrent I/O and dynamic scheduling.
+      Designed synchronization logic to avoid race conditions and deadlocks,
+      reducing average wait time by ~60%.
 
-    Week 10: Interview Ready
-        Update “Headline” with Actively Looking.
-        Full mock interview (DSA + C++ concepts).
-        Revise networking (TCP vs UDP, SSL/TLS basics).
-        Apply to 5–6 roles.
-        Start tracking interview callbacks.
-        LinkedIn post: “Why C++17/20 features matter in modern systems programming”.
 
-    Week 11: Fine-Tuning
-        Highlight leadership (mentoring interns, code reviews).
-        Revise top 50 LeetCode problems.
-        Practice 2 system design mock sessions.
-        Apply to 5–7 roles.
-        Follow up with past applications (email/LinkedIn).
-        Post GitHub update on SCEP/Smart Card Auth project learnings.
+WFH
+   1. Atlassian 
+   2. VMware (some teams)
+   3. Paytm 
+   4. Airbnb 
+   5. Disney+ Hotstar 
+   6. Meesho 
+   7. Mindtickle 
+   8. BrowserStack 
+   8. Swiggy 
+   9. Coinbase 
+   10. Cimpress 
+   11. Akamai Technologies 
+   12. EPAM Anywhere 
+   13. Indeed 
+   14. Nagarro 
+   15. Publicis Sapient 
+   16. Avalara 
+   17. DXC Technology
+   18. Twilio 
 
-    Week 12: Launch Week
-        Final polish, keep multiple versions (embedded, backend, system).
-        Light revision: focus on weak topics.
-        One last mock interview.
-        Apply to 10 high-priority roles (FAANG/GCC/product).
-        Schedule interviews with recruiters you connected.
-        Share a post: “2 years in C++ systems programming: key learnings”.
-        

@@ -45,6 +45,30 @@ int getCelebrity(std::vector<std::vector<int>> arr)
     return celeb;
 }
 
+// O(1) space
+int getCelebrityOptimal(const std::vector<std::vector<int>> &arr)
+{
+    int n = arr.size();
+    int i = 0, j = n - 1;
+
+    while (i < j)
+    {
+        if (arr[i][j] == 1)
+            i++; // i knows j → i can't be celeb
+        else
+            j--; // i doesn't know j → j can't be celeb
+    }
+
+    int celeb = i;
+
+    for (int k = 0; k < n; k++)
+    {
+        if (k != celeb && (arr[celeb][k] == 1 || arr[k][celeb] == 0))
+            return -1;
+    }
+    return celeb;
+}
+
 int main()
 {
     std::vector<std::vector<int>> arr = {{0, 1, 0},

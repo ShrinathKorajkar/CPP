@@ -3,18 +3,18 @@
 #include <algorithm>
 
 /*
+    array = sizeofelements
     list = 24
     vector = 24
     pqueue = 32
-    stack = 80
-    queue = 80
-    deque = 80
-    array = sizeofelements
     set = 48
     map = 48
     uset = 56
     umap = 56
- */
+    stack = 80
+    queue = 80
+    deque = 80
+*/
 
 int main()
 {

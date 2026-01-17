@@ -19,6 +19,8 @@ public:
 // Concrete Observer class
 class ConcreteObserver : public Observer
 {
+    std::string name_;
+
 public:
     ConcreteObserver(const std::string &name) : name_(name) {}
 
@@ -26,9 +28,6 @@ public:
     {
         std::cout << name_ << " received message: " << message << std::endl;
     }
-
-private:
-    std::string name_;
 };
 
 // Subject interface
@@ -44,6 +43,8 @@ public:
 // Concrete Subject class
 class ConcreteSubject : public Subject
 {
+    std::vector<Observer *> observers_;
+
 public:
     void attach(Observer *observer) override
     {
@@ -67,9 +68,6 @@ public:
             observer->update(message);
         }
     }
-
-private:
-    std::vector<Observer *> observers_;
 };
 
 int main()

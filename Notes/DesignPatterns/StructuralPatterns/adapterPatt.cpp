@@ -4,55 +4,54 @@
 
     Adapter Pattern  ->  Allows the interface of an existing class to be used as another interface.
     It is often used to make existing classes work with others without modifying their source code.
+
+    Allows two incompatible interfaces to work together
+    Applications - wrapping windows/linux apis, 3rd party libraries, creating boundaries
 */
 
 #include <iostream>
 #include <string>
 
-// Legacy class with an incompatible interface
-class LegacyRectangle
+// Target interface (what your app expects)
+class IMediaPlayer
 {
-    int x1_, y1_, x2_, y2_;
-
 public:
-    LegacyRectangle(int x1, int y1, int x2, int y2) : x1_(x1), y1_(y1), x2_(x2), y2_(y2) {}
+    virtual void playVideo(const std::string &file) = 0;
+    virtual ~IMediaPlayer() = default;
+};
 
-    void oldDraw()
+// Existing or library provide
+class ThirdPartyVideo
+{
+public:
+    void render(const std::string &filename)
     {
-        std::cout << "LegacyRectangle: oldDraw method called." << std::endl;
-        std::cout << "Coordinates: (" << x1_ << ", " << y1_ << ") - (" << x2_ << ", " << y2_ << ")" << std::endl;
+        std::cout << "Rendering using 3rd party codec: " << filename << "\n";
     }
 };
 
-// Target interface expected by the client code
-class Rectangle
+// Adaptor
+class VideoAdapter : public IMediaPlayer
 {
-public:
-    virtual void draw() = 0;
-    virtual ~Rectangle() {}
-};
-
-// Adapter class that adapts LegacyRectangle to the Rectangle interface
-class LegacyRectangleAdapter : public Rectangle
-{
-    LegacyRectangle legacyRectangle_;
+    ThirdPartyVideo &tpVideo;
 
 public:
-    LegacyRectangleAdapter(int x1, int y1, int x2, int y2) : legacyRectangle_(x1, y1, x2, y2) {}
+    VideoAdapter(ThirdPartyVideo &lib) : tpVideo(lib) {}
 
-    void draw() override
+    void playVideo(const std::string &file) override
     {
-        std::cout << "LegacyRectangleAdapter: draw method called." << std::endl;
-        legacyRectangle_.oldDraw();
+        tpVideo.render(file); // translate call
     }
 };
 
 int main()
 {
-    Rectangle *rect = new LegacyRectangleAdapter(10, 20, 30, 40);
-    rect->draw();
+    ThirdPartyVideo thirdPartyLib;
 
-    delete rect;
+    // Use adapter to match IMediaPlayer interface
+    IMediaPlayer *player = new VideoAdapter(thirdPartyLib);
 
-    return 0;
+    player->playVideo("movie.mp4");
+
+    delete player;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 class Person
 {
@@ -15,6 +16,16 @@ private:
     std::string name_;
     int age_;
 };
+
+template <typename Contianer>
+void printContainer(const Contianer &c)
+{
+    for (const auto &elem : c)
+    {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+}
 
 int main()
 {
@@ -41,7 +52,7 @@ int main()
     array2.pop_back();
     array2.insert(array2.begin() + 1, 2);
     array2.erase(array2.end() - 1);
-    array.shrink_to_fit();
+    array.shrink_to_fit(); // reduces capacity to as close as size(), allocate new mem, free older
 
     std::cout << "Array 2 Elements : ";
     for (std::vector<int>::iterator i = array2.begin(); i != array2.end(); ++i)
@@ -50,8 +61,8 @@ int main()
     }
     std::cout << std::endl;
 
-    std::swap(array2, array);
-    array.swap(array2);
+    std::swap(array2, array); // swap only internal buffer pointers
+    array.swap(array2);       // also swap capacity and size values
 
     array2.clear();
     std::cout << "Array 2 capacity : " << array2.capacity() << std::endl;
@@ -70,7 +81,7 @@ int main()
     std::cout << std::endl;
 
     std::vector<int> newValues = {10, 20, 30};
-    numbers.assign(newValues.begin(), newValues.end());
+    numbers.assign(newValues.begin(), newValues.end()); // copies values, capacity and size
 
     std::cout << "Modified Vector: ";
     for (const int &num : numbers)
@@ -92,5 +103,15 @@ int main()
 
     std::cout << std::endl
               << sizeof(people) << std::endl;
+
+    //
+
+    std::vector<int> arr = {1, 4, 5, 6};
+    std::sort(arr.begin(), arr.end());
+
+    printContainer(arr);
+
+    std::sort(arr.begin(), arr.end(), std::greater<int>());
+    printContainer(arr);
     return 0;
 }

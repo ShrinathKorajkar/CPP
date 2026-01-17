@@ -26,6 +26,13 @@ void print(const T &value, const U &value1)
     std::cout << value1 << std::endl;
 }
 
+template <typename Container>
+void print_first(Container c)
+{
+    typename Container::iterator it = c.begin(); // must use typename or else compiler will think iterator is a static var not a type
+    std::cout << *it << std::endl;
+}
+
 int main()
 {
     std::cout << returnStr(1) << std::endl;

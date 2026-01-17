@@ -7,7 +7,7 @@ int main()
 {
     std::vector<int> arr = {1, 3, 4, 5};
 
-    int ans = std::accumulate(arr.begin(), arr.begin() + 2, 0);
+    int ans = std::accumulate(arr.begin(), arr.begin() + 3, 0);
 
     std::cout << ans << std::endl;
 

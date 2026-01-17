@@ -13,6 +13,7 @@ Approach:
     2. If array size = n, then total subarrays can be formed = n(n+1)/2
     3. Two or more pointers
     4. Use constant space to store
+    5. Check if sorting helps
 
 Notes
     - O(n!) will be in getting all permutations, travelling salesman prob, backtrack to all possible options, Nqueens brute force
@@ -23,7 +24,7 @@ Notes
     - recurrence relation, total rec calls * total work in each call
     - Space in recursion : depth of call stack or recursion tree *+ auxiliary space in each call
     - fibonaci actual = O(1.618^n) golden ratio
-    - 1sec = 10^8 operations in competetive code
+    - 1sec = 10^8 operations in competetive code  =>  online compilers (2-3 GHz) -> 2-3 x 10^9 cycles per second / ~25 cycles per iteration(add,compare,loopinc) = ~10^8 iterations
     - n > 10^8, 2^26 -> O(logN), O(1)
     - n <= 10^8, 2^26 -> O(n)
     - n <= 10^6, 2^19 -> O(nlogN)
@@ -47,8 +48,13 @@ Common Algos
     s.erase(start, length)
     std::stoi(str.c_str());
     std::gcd(a, b) => <numeric>
+    std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
     std::accumulate(vec.begin(), vec.end(), 0) => to find sum of vec (<numeric>)
+    std::lower_bound(potions.begin(), potions.end(), min); => not less than or equal to given val
+
+    list.splice(iteratorPos, list2, *first, *second);  =>  move elements from one list into another without copying. (list2 becomes empty)
+    * -> means optional args, splice works only with list
 
 Modulo Arithmetics
     1. (x + y) % m = (x % m) + (y % m)
@@ -70,6 +76,7 @@ Notes:
     4. Permutations: n! (doesn't include {})
     5. Subset: Subsequence that do not preserve order (both 1,3 and 3,1 are valid)
     6. BST: inorder traversal is sorted, log N search
+    7. level order traversal can also be done using pre/post/inorder by maintaining depth level => ans[depth].push_back(root->val);
 
 
 Graphs

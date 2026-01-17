@@ -1,57 +1,143 @@
 #include <iostream>
 #include <vector>
-#include <sstream>
 
-int compareVersion(std::string version1, std::string version2)
+struct Node
 {
-    std::stringstream str1(version1);
-    std::stringstream str2(version2);
+    int data;
+    Node *left;
+    Node *right;
 
-    std::vector<int> ver1, ver2;
-    std::string rev;
-    while (std::getline(str1, rev, '.'))
-    {
-        ver1.push_back(std::atoi(rev.c_str()));
-    }
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
 
-    while (std::getline(str2, rev, '.'))
-    {
-        ver2.push_back(std::atoi(rev.c_str()));
-    }
+class BST
+{
+    Node *root;
 
-    while (ver1.size() != ver2.size())
+    Node *searchHelper(const int &val)
     {
-        if (ver1.size() < ver2.size())
+        Node *currNode = root;
+        Node *resultNode = nullptr;
+
+        while (currNode != nullptr)
         {
-            ver1.push_back(0);
+            if (currNode->data == val)
+            {
+                resultNode = currNode;
+                break;
+            }
+
+            if (currNode->data < val)
+            {
+                currNode = currNode->right;
+            }
+            else
+            {
+                currNode = currNode->left;
+            }
+        }
+
+        return resultNode;
+    }
+
+    Node *searchHelper(Node *currNode, const int &val)
+    {
+        if (currNode == nullptr || currNode->data == val)
+        {
+            return currNode;
+        }
+
+        if (currNode->data < val)
+        {
+            return searchHelper(currNode->right, val);
         }
         else
         {
-            ver2.push_back(0);
+            return searchHelper(currNode->left, val);
         }
     }
 
-    for (int i = 0; i < ver1.size(); i++)
-    {
-        if (ver1[i] == ver2[i])
-        {
-            continue;
-        }
+public:
+    BST(Node *root = nullptr) : root(root) {}
 
-        if (ver1[i] < ver2[i])
+    Node *searchNode(const int &val)
+    {
+        // return searchHelper(root, val);
+        return searchHelper(val);
+    }
+};
+
+void findInOrderTraversal(Node *root, std::vector<int> &inorder)
+{
+    if (root == nullptr)
+    {
+        return;
+    }
+
+    findInOrderTraversal(root->left, inorder);
+    inorder.push_back(root->data);
+    findInOrderTraversal(root->right, inorder);
+}
+
+bool isBSTValid(Node *root)
+{
+    std::vector<int> inorder;
+    findInOrderTraversal(root, inorder);
+
+    for (int i = 0; i < inorder.size() - 1; i++)
+    {
+        if (inorder[i] > inorder[i + 1])
         {
-            return -1;
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/*
+     5
+  2     7
+0   3
+*/
+void testSearchInBST()
+{
+    Node *root = new Node(5);
+    root->left = new Node(2);
+    root->left->left = new Node(0);
+    root->left->right = new Node(3);
+    root->right = new Node(7);
+
+    std::vector<int> testValues = {2, 1, 7, 5, 0, 8};
+
+    BST *bst = new BST(root);
+
+    if (isBSTValid(root))
+    {
+        std::cout << "check: BST is valid" << std::endl;
+    }
+    else
+    {
+        std::cout << "check: BST is not valid: Test failed!!!" << std::endl;
+        return;
+    }
+
+    for (auto testValue : testValues)
+    {
+        Node *resultNode = bst->searchNode(testValue);
+        if (resultNode != nullptr)
+        {
+            std::cout << "found the node for : " << testValue << " : " << resultNode->data << std::endl;
         }
         else
         {
-            return 1;
+            std::cout << "Did not find any node for : " << testValue << std::endl;
         }
     }
-
-    return 0;
 }
 
 int main()
 {
+    testSearchInBST();
     return 0;
 }

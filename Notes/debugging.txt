@@ -474,6 +474,7 @@
             - *(val1, val2)  :-  EQ, NE, LT, GT, GE, STREQ, STRNE, STRCASEEQ, STRCASENE, FLOAT_EQ, DOUBLE_EQ
             - *(condition)   :-  TRUE, FALSE
             - *(pointer)     :-  NULL, NOT_NULL
+            - STREQ compares c-style strings, EQ works for std::string
 
             - *(val1, val2, abs_err)  :-  NEAR
             - *(stmt, execeptionType) :-  THROW
@@ -554,11 +555,8 @@
     5. Theory
         a. Test Fixture  :-  class that serves as a shared context or environment for a group of related test cases. 
            This class typically includes setup and teardown code that run before and after each test case within the fixture.
-
         b. Test suit     :-  collection of related test cases, share common fixture
-
         c. Parameterized :-  used both with and without fixtures
-
         d. Typed Test    :-  parameterized test cases that can be instantiated with different data types or values
 
     6. GMock
@@ -675,4 +673,58 @@
         3. PopUp blockers
         4. Hover link
         5. Destroy confedential data before desposing
+
+
+# Debugging Tools
+    1. General Theory
+        a. instrumentation - inserting extra instructions that observer pgm behavior
+        b. 
+
+    1. Valgring
+        a. It is a dynamic binary instrumentation framework
+        b. It runs program on a synthetic CPU
+        c. program -> valgrind core (virtual CPU) -> Host CPU : 
+          (Binary → Decode → IR → Instrument → Encode → Execute)
+        d. working
+            - valgring loads executable
+            - replace program's execution env
+            - Dynamic Binary Translation (DBT)
+                - reads machine instructions from .exe/elf
+                - translate them into Intermediate representation
+                - instruments the IR -> add checks
+                - translate IR back to machine code -> .exe/elf
+                - execute it on host CPU
+        e. Shadow memory
+            - maintains shadow memory - metadata (addressability, definedness)
+            - for every instruction -> inject checks (valid addr, mem initialization, access size)
+            - shadow memory - 
+            - real memory     : A B C D
+            - valgrind shadow : V V U U 
+            - V : valid + initialized     U : uninitialized     X : invalid
+        f. Intercepts - malloc/free/new/delete 
+            - tracks - allocation size, stack trace, freed block
+        g. detects - leaks, double free, invalid free, use-after-free, uninitialized reads, invalid read/write
+        h. slow -> emulated CPU, IR translation, access checks runtime (10-50x slowdown)
+        i. doesn't require compilation, binary rewriting, detect uninitialized memory(asan doesn't).
+        j. Tracks every byte, definedness, address validity
+
+    2. ASan - Address Sanitizer
+        a. compiler based instrumentation tool
+        b. modifies program at compile time
+        c. program -> ASan instrumentation -> native CPU execution (no virtual CPU) : 
+            (Source → Compile → Instrument → Native Execution)
+             C++ -> LLVM IR -> ASan checks -> machine code
+        d. working:
+            - while compiling, injects checks around
+            - load, store, allocation, deallocation instructions
+        e. uses 1:8 shadow mapping  =>  shadow address = (real_addr >> 3) + offset
+            - 1 shadow byte represents 8 real bytes 
+            - shadow byte indicate - accessible, partial access, invalid
+            - Real:   [A][B][C][D][E][F][G][H]
+            - Shadow: 0x00  (all valid)
+            - Shadow: 0xF1  (invalid)
+        f. detects - buffer overflows, underflows, use-after-free, use-after-scope, exact mem location/stack
+        g. faster -> native execution, compile-time instrumentation, (2-3x slower), very high precision
+        h. Tracks - address validity only
+
 

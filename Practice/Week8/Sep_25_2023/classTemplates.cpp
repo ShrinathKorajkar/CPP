@@ -71,6 +71,8 @@ int main()
     std::cout << obj2.getData() << std::endl;
 
     // MyGenericClass obj3; // error
+    // Array newArray; // no-error
+    // Array<> newArray; // works as well
 
     Array<int> intArray;
     Array<double, 10> doubleArray;

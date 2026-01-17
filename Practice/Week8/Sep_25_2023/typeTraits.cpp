@@ -48,7 +48,6 @@ struct SpecializationSelector
 };
 
 template <typename T>
-
 struct SpecializationSelector<T, std::enable_if_t<std::is_integral_v<T>>>
 {
     static void display()

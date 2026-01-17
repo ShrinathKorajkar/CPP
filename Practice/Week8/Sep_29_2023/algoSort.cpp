@@ -29,11 +29,12 @@ int main()
     std::list<int> list = {9, 2, 5, 2, 5, 6, 7, 3, 2, 1, 9};
     std::forward_list<int> forward_list = {9, 2, 5, 2, 5, 6, 7, 3, 2, 1, 9};
 
-    // Introsort - inplace
+    // Introsort - inplace, unstable
     std::sort(myVec.begin(), myVec.end());
     std::sort(stringVec.begin(), stringVec.end());
     std::sort(deque.begin(), deque.end());
 
+    // Mergesort - non random access iterators
     list.sort();
     forward_list.sort();
 
@@ -43,15 +44,15 @@ int main()
     }
     std::cout << std::endl;
 
-    // merge sort -  stable sort
+    // merge sort -  stable sort, non-inplace
     std::stable_sort(myVec.begin(), myVec.end());
     std::stable_sort(stringVec.begin(), stringVec.end());
     std::stable_sort(deque.begin(), deque.end());
 
-    // heap sort - inplace
+    // heap sort - inplace, unstable
     std::vector<int> numbers = {5, 2, 9, 1, 5};
-    std::make_heap(numbers.begin(), numbers.end());
-    std::sort_heap(numbers.begin(), numbers.end());
+    std::make_heap(numbers.begin(), numbers.end()); // generate max-heap - O(n)
+    std::sort_heap(numbers.begin(), numbers.end()); // take existing heap and sort it in ascending order - O(n logn)
 
     return 0;
 }

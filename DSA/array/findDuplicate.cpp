@@ -1,6 +1,10 @@
 #include <iostream>
 #include <vector>
 
+/*
+    There is only one repeated number in array. return this number.
+    integers in range [1, n]
+*/
 int findDuplicate(std::vector<int> &nums)
 {
     int len = nums.size();

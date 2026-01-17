@@ -13,7 +13,7 @@ public:
         std::unique_lock<std::mutex> lock(mutex_);
         while (count_ <= 0)
         {
-            condition_.wait(lock);
+            condition_.wait(lock); // block until notified.
         }
         count_--;
     }

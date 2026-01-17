@@ -16,7 +16,7 @@
                            security, IPC, sys call, Nw directly interact with hardware.
         os             :-  kernel, utilities, libraries, applications
                        =>  kernel, memory manager, process manager, file system, device drivers, I/O manager, UI, 
-    10. PCB(process control blocks) are stored in scheduling queues
+    10. PCB(process control blocks) are stored in scheduling queues - PID, PC, stack pointer, registers
     11. Aging is process of increasing the priorities of long waiting processe
     12. init script    :-  startup and shutdown of system services and deamon
 
@@ -414,6 +414,29 @@
         - SSL version now renamed to TLS. v1.3 (curr)
         - Digi Cert
         - 3 way handshake for ssl
+            a. Negotiation (cipher suite, version, extension)
+            b. Authentication (server cert, optionally client cert)
+            c. Key exchange (establish a shared secret)
+            d. Key derivation (derive symmetric keys)
+            e. Secure application data (record layer: encrypt)
+        - Modern TLS use ECDHE (elliptic-curve Diffie-Hellman) or DHE(ephermeral)
+        - TLS 1.2
+            a. client hello -> cipher suite, version, sni, signature algo, elliptic curve
+            b. server hello -> chosen tls version, cipher suite
+            c. certificate (server->client) -> x.509 cert
+            d. serverKeyExchange (optional) -> sent when not conveyed in cert (ECDHE sends public key, RSA this is not used)
+                                               contains signature by server
+            e. certificate req (server->client) -> optional if server req client cert for mutual TLS.
+            f. server hello done.
+            g. clientKeyExchange -> client generate master_secret, encrypts with server RSA public key 
+                                 -> In ecdhe, client sends ephermeral public value
+                                 -> may provide cert
+            h. certificateVerfy (optional) -> if client presented cert
+            i. changeCipherSpec -> tell server subsequent records will be protected using negotiated keys
+            j. finished -> first encrypted data, verify data = master secret, hash
+            k. changeCipherSpec -> from server similarly
+        - TLS 1.3
+            a. 
 
     2. TCP/IP
         a. Application

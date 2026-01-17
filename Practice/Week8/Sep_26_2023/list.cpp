@@ -37,7 +37,7 @@ int main()
                       { return num % 2 == 0; });
 
     myList2.unique();
-    myList2.merge(myList); // merge in sorted order
+    myList2.merge(myList); // merge assuming lists are in sorted order
 
     for (const auto &num : myList2)
     {
