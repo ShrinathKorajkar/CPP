@@ -1,143 +1,63 @@
-#include <iostream>
-#include <vector>
-
-struct Node
-{
-    int data;
-    Node *left;
-    Node *right;
-
-    Node(int data) : data(data), left(nullptr), right(nullptr) {}
-};
-
-class BST
-{
-    Node *root;
-
-    Node *searchHelper(const int &val)
-    {
-        Node *currNode = root;
-        Node *resultNode = nullptr;
-
-        while (currNode != nullptr)
+#include<iostream>
+#include<thread>
+#include<mutex>
+#include<condition_variable>
+#include<queue>
+#include<chrono>
+ 
+ 
+std::mutex m;
+std::condition_variable cv;
+std::queue<int> q;
+bool done = false;
+ 
+void producer(){
+    for(int i = 0; i<5; i++){
         {
-            if (currNode->data == val)
-            {
-                resultNode = currNode;
-                break;
-            }
-
-            if (currNode->data < val)
-            {
-                currNode = currNode->right;
-            }
-            else
-            {
-                currNode = currNode->left;
-            }
+        std::lock_guard<std::mutex> lock(m);
+        q.push(i);
+        std::cout<<"Produced: "<<i<<std::endl;
         }
-
-        return resultNode;
-    }
-
-    Node *searchHelper(Node *currNode, const int &val)
-    {
-        if (currNode == nullptr || currNode->data == val)
-        {
-            return currNode;
-        }
-
-        if (currNode->data < val)
-        {
-            return searchHelper(currNode->right, val);
-        }
-        else
-        {
-            return searchHelper(currNode->left, val);
-        }
-    }
-
-public:
-    BST(Node *root = nullptr) : root(root) {}
-
-    Node *searchNode(const int &val)
-    {
-        // return searchHelper(root, val);
-        return searchHelper(val);
-    }
-};
-
-void findInOrderTraversal(Node *root, std::vector<int> &inorder)
-{
-    if (root == nullptr)
-    {
-        return;
-    }
-
-    findInOrderTraversal(root->left, inorder);
-    inorder.push_back(root->data);
-    findInOrderTraversal(root->right, inorder);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    cv.notify_one();
+ 
 }
-
-bool isBSTValid(Node *root)
+ 
 {
-    std::vector<int> inorder;
-    findInOrderTraversal(root, inorder);
-
-    for (int i = 0; i < inorder.size() - 1; i++)
-    {
-        if (inorder[i] > inorder[i + 1])
-        {
-            return false;
-        }
-    }
-
-    return true;
+    std::lock_guard<std::mutex> lock(m);
+    done = true;
 }
-
-/*
-     5
-  2     7
-0   3
-*/
-void testSearchInBST()
-{
-    Node *root = new Node(5);
-    root->left = new Node(2);
-    root->left->left = new Node(0);
-    root->left->right = new Node(3);
-    root->right = new Node(7);
-
-    std::vector<int> testValues = {2, 1, 7, 5, 0, 8};
-
-    BST *bst = new BST(root);
-
-    if (isBSTValid(root))
-    {
-        std::cout << "check: BST is valid" << std::endl;
-    }
-    else
-    {
-        std::cout << "check: BST is not valid: Test failed!!!" << std::endl;
-        return;
-    }
-
-    for (auto testValue : testValues)
-    {
-        Node *resultNode = bst->searchNode(testValue);
-        if (resultNode != nullptr)
-        {
-            std::cout << "found the node for : " << testValue << " : " << resultNode->data << std::endl;
-        }
-        else
-        {
-            std::cout << "Did not find any node for : " << testValue << std::endl;
-        }
-    }
+ 
+cv.notify_one();
 }
-
-int main()
-{
-    testSearchInBST();
+ 
+void Consumer(){
+    while(true){
+        std::unique_lock<std::mutex> lock(m);
+ 
+        cv.wait(lock, []{
+            return !q.empty() || done;
+        });
+ 
+        if(!q.empty()){
+            int val = q.front();
+            q.pop();
+            std::cout<<"Consumed: "<<val<<std::endl;
+ 
+        }
+        else if(done){
+            break;
+        }
+    }
+    std::cout<<"Consumer exiting.."<<std::endl;
+}
+ 
+int main(){
+    std::thread t1(producer);
+    std::thread t2(Consumer);
+ 
+    t1.join();
+    t2.join();
+ 
     return 0;
 }

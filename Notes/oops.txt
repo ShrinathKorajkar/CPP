@@ -71,7 +71,7 @@
     3. base constr is called first, base destruc is last
     4. In-class member initialization, member variable are initialized in order of decl
     5. A const member/object requires user defined default constructor as const req initialization at time of creation (when data members don't have default value)
-       The compiler won't provide default constructor when const, ref members are present.
+       The compiler won't provide default constructor when const, ref members are present and unitialised.
     6. use delete and default keyword
     7. user defined constructor is req =>  const obj or member, initialization, dynamic data
         user defined destructor is req =>  deallocate res, virtual destruc

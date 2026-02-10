@@ -16,7 +16,7 @@
     Most commonly used in DSA :- sort,find,accumulate,transform,min,max,swap,min_element,max_element,fill,replace,to_string,stoi,splice, time/space complexity, custom comparator in sort
 
 Sri Siva Balaji PG for Gents, #76, 36th Main Road, Dollar Scheme Colony, 1st Stage BTM, Bengaluru -
-5600068
+560068
 
 ## Job Search Filters
    C++ Linux Developer
@@ -240,3 +240,12 @@ WFH
    17. DXC Technology
    18. Twilio 
 
+Learn:
+   Process, threads and concurrency – fork, exec, context switch, scheduling, mutex, semaphore, locks, cv, deadlocks, race conditions 
+   Memory management – virtual memory, paging, segmentation, heap vs stack, mmap, shared memory, copy-on-write, fragmentation, allocator strategies, memory leak 
+   File and storage – VFS, ext4 basics, inodes, file descriptor work, Epoll/select/poll, async I/O 
+   Networking – TCP handshake, retransmission, congestion control, UDP use cases, socket api, TLS basics, DNS internals 
+   Linux – IPC, local caching, REST, gRPC, websockets, systemd service,  
+   Patterns – OOP, Dependency injection, plugin based architecture, singleton, factory, strategy, observer, adapter, decorator. 
+
+Copy USB related Info

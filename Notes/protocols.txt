@@ -1,0 +1,206 @@
+# TCP
+# TLS
+
+
+# 802.1x
+    802.1X is a network access control (authentication) protocol that enforces authentication before a client (also called a supplicant) is allowed to access the network. 
+    Supplicant (Client) → Device that wants to connect to the network. 
+    Authenticator (Switch/Access Point) → Forwards authentication requests. 
+    Authentication Server (RADIUS/AAA Server) → Verifies credentials and issues access approval. 
+    
+    Authentication flow: EAP-TLS (Extensible Authentication Protocol - Transport Layer Security) 
+        Client initiate connection -> sends EAPOL-Start (EAP over LAN) request to authenticator 
+        Authenticator sends EAP-Request/Identitiy message to client 
+        Client respond with EAP-Response/Identitiy, containing its username and identity 
+        Authenticator forwards Identity to Authentication Server(RADIUS) - RADIUS Access-Request (with identity) 
+        Server sends authentication challenge EAP-Request (Challenge), RADIUS Access-Challenge 
+            If EAP-TLS is used, server req a client cert  
+            Server may send its own cert to client -> EAP-Request / EAP-TLS (ServerHello, Certificate, ServerKeyExchange, ServerHelloDone) 
+        Client sends cert (x.509 cert) signed by CA along with its public key EAP-Response (Challenge Response), RADIUS Access-Request (With EAP-Response) 
+            EAP-Response / EAP-TLS (ClientHello, Certificate, ClientKeyExchange, Finished) 
+        Server Verifies Certificate -> valid, signed by trusted CA, not expired 
+        Server sends an EAP-Success or EAP-Failure msg to authenticator (RADIUS Access-Accept, RADIUS Access-Reject) 
+        The authenticator allows the client to access the network, transitions port to authorized state 
+
+    EAP-TLS : Uses X.509 client cert for authentication, most secure method, requires a PKI for issuing cert. 
+    PEAP – Protected EAP, use TLS for encryption, but authentication is passwd-based. 
+    X.509 is a standard for PKI certs used for SSL/TLS, email encryption, 802.1X authentication. Contains Public key, Issuer info, Validity period, Digital Signature of the CA 
+    
+    ECDHE (Ephemeral Elliptic Curve Diffie-Hellman) 
+    GCM is faster than CBC, 0xC013, 0xC014 is weak. Encryption and hash algo 
+    secp256r1 (P-256) and secp384r1 (P-384) are commonly used in TLS 1.2/1.3. 
+    
+    cipher suite list:  
+        TLS 1.2 
+        0xc02f : TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 
+        0xc030 : TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 
+        0xc027 : TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 
+        0xc013 : TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA 
+        0xc028 : TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 
+        0xc014 : TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA 
+        
+        TLS 1.3  
+        It removes RSA key exchange and CBC-based ciphers 
+        0x1301 : TLS_AES_128_GCM_SHA256 
+        0x1302 : TLS_AES_256_GCM_SHA384 
+        0x1303 : TLS_CHACHA20_POLY1305_SHA256 (mobile device) -> Not in FW 
+    
+    Elliptic Curve: 
+        21 : secp224r1 
+        23 : secp256r1 
+        24 : secp384r1 
+        25 : secp521r1 
+        29 : x25519 (256-bit) not used in FW (not all sys support) 
+
+
+# SCEP
+    SCEP (Simple Certificate Enrollment Protocol) - 
+    protocol designed to make it easier to manage and issue X.509 certificates. - req cert from CA, renew cert, retrieve CA cert and CRLs(certificate revocation list) 
+    
+    X.509 is a standard for digital certificates used in cryptography to verify identities and establish secure connections — especially in SSL/TLS, email encryption, VPNs, and smart cards. 
+    An X.509 certificate (like .pem, .crt, .cer, or .der files) typically includes: Subject, Issuer - The CA (Certificate Authority) that issued the cert, Public Key, Validity, Serial Number, Unique ID issued by the CA, Signature - The CA's digital signature verifying the cert, Extensions, Additional info like key usage, subject alt names, etc. 
+    EJBCA (Enterprise Java Bean Certificate Authority) - open source CA software. Support various PKI(public key infrastructure) standards and provides tools to manage certificates, certificate authorities, and related infrastructure. 
+    PKCS – public key cryptographic standard 
+    PKCS#7 : cryptographic message syntax, CMS, standard format for cryptographically signed or encrypted messages. Used for securely transmitting certs or signing/verifying data. It only carries public keys, file extension(.p7b or p7c or p7s).  
+    PKCS#10 : defines format for CSR. Sent to a CA to obtain digital cert. Contains subject info(CN,O,C), public key, signature, attributes(key usage, SAN, extended key usage). File extension (.csr) 
+
+    SCEP WORKFLOW 
+        EJBCA implements or exposes SCEP via http/https. Define CA(key length, usage policies) 
+        Client generate private,public key -> sends certificate signing request (CSR) containing public key and identity info -> SCEP server validates CSR(using RegAuth) -> CA issues signed cert and send to client -> client install cert and associate it with its private key.  
+        Similar with Host. When client – host connect, both share certs and verify it against CA's root cert 
+
+    Initial setup -> configure SCEP server, CA cert, RA settings, enable endpoints for getCAcert, PKCSReq, define algo(key size, signing/hash algo) 
+    getCAcert request -> client send GET to SCEP server with operation=getCAcert. (used to validate and verify signatures made by CA) 
+    Server respond with PKCS#7 msg containing -> public CA cert, intermediate cert. 
+    Client generate private-public key pair for CSR, generate PKCS#10 CSR using generated public key (DN -> CN, O, C; SubjectAltName) 
+    Sends CSR(PKCSReq) with challenge password. 
+    Server validates SCEP req -> verify signature, check challenge pass, validate CSR againt CA policy 
+    Server generate and signs the cert using CA's private key and store it for retrieval. Or sends it as response of PKCSreq 
+    Client sends a GetCert or GetCertIntial request if PKCSReq response don't contain the signed cert. 
+    Server returns the cert in PKCS#7 message 
+    Client installs the issued cert. 
+
+
+# Smart Cards
+    Smart card authentication 
+        overall flow = detect card → read ATR / identify card type → select relevant applet / PKCS#15 or PIV 
+        application → discover certificate objects → verify PIN (VERIFY APDU) → perform authentication 
+        operation (internal sign / challenge-response) → log & map identity to local account. 
+ 
+        Detect reader(s) and card insertions 
+            Use PC/SC (winscard) to detect readers and card insert/remove events. 
+        Read ATR and identify card family / applets 
+            ATR gives vendor/product info; use it to pick a profile or try common AIDs. 
+        Choose access method 
+            Prefer: PKCS#11 (OpenSC), Windows minidriver / CAPI / CNG, or vendor middleware (SafeNet/Thales IDGo). 
+            If low-level control needed: use raw APDUs via PC/SC. 
+        Select application (AID) 
+            Select the relevant applet (PKCS#15, PIV, or vendor applet). 
+            You may also query GlobalPlatform / Card Manager to enumerate applications. 
+        Discover certificate(s) / key objects 
+            Use PKCS#15 structures, PIV objects, or vendor proprietary files to find X.509 certs. 
+        Verify PIN 
+            Send ISO 7816 VERIFY APDU or use middleware PIN API. Check retry counters and blocked state. 
+        Authenticate 
+            For smart-card logon or client auth: perform internal signature (sign a challenge) using the card’s private key (APDU / PKCS#11 C_Sign or CAPI CryptSign). 
+            Validate returned signature server-side and map subject (or UPN) to local account. 
+        PIN management 
+            Provide CHANGE PIN, UNBLOCK (with PUK), and status reporting. 
+        Audit & fallback 
+            Log attempts, retries, failure reasons. Provide fallback auth if card fails. 
+
+    SELECT command 
+        00 A4 04 00 <Lc> <AID> 
+    GET DATA 
+        00 CA 9F 7F 00   (GET DATA tag 9F7F for CPLC, Le = 0 => implicit) 
+    VERIFY  
+        CLA = 00, INS = 20, P1 = 00 or FF, P2 = key reference, Lc = length, Data = PIN bytes. 
+        00 20 00 80 08 3132333435363738 
+        Responses: 
+            90 00 → PIN verified 
+            63 CX → PIN incorrect, X = retries left (common behavior). Yubico DocsKeycard 
+            69 83 or 69 84 or 69 85 → security condition not satisfied / access denied (often need prior authentication or select). 
+    READ BINARY / READ RECORD 
+        00 B0 <offsetHi> <offsetLo> <Le> 
+
+    TLS Client Auth flow: 
+    Client → Server 
+        Sends the client certificate chain (from smart card or from local cert store). 
+        Example: ClientCertificate, IntermediateCA, RootCA. 
+    Server → Client 
+        Sends a challenge (random data or handshake hash) that must be signed. 
+    Client → Smart Card 
+        The host application (or TLS library) asks the smart card: 
+        “Please sign this challenge/hash with your private key.” 
+        The card uses the unlocked private key to generate a digital signature and returns it. 
+    Client → Server 
+        Sends the signed data (the proof). 
+        The server verifies it using the public key from the client certificate. 
+    Server Decision 
+        If the signature is valid and the certificate chain is trusted → client authenticated. 
+        If invalid or cert untrusted → authentication fails. 
+
+
+# USBx
+    debounce refers to the process of filtering out noise or spurious signals that can occur when a USB device is connected or disconnected 
+    a STALL condition is a mechanism used by a USB device to indicate an error or an inability to process a request. 
+    Common Causes: STALL conditions can occur due to various reasons, such as unsupported requests, invalid data, or resource limitations on the device 
+
+    Summary of Enumeration Flow 
+        Connection Detection: Device signals connection via pull-up resistor. 
+        Reset: Host resets the device to establish default state. 
+        GET_DESCRIPTOR: Host retrieves Device Descriptor to identify the device using default address 
+        SET_ADDRESS: Host assigns a unique address to the device. 
+        GET_DESCRIPTOR (Full): Host retrieves Configuration, String, and other descriptors. Using new address. (device descriptor and configuration descriptor - which also contain interface and endpoint descriptors) 
+        SET_CONFIGURATION: Host configures the device for operation. Selects configuration. 
+        GET_HUB_DESCRIPTOR: host queries no of downstream ports, power mgmt capabilities, overcurrent protection status. 
+        SET_FEATURE: host powers up each downstream port of hub individually 
+        Host monitors status of hub's ports -> GET_STATUS, CLEAR_FEATURE, enumerates any connected device of hub 
+        Transfer Types: Host uses control, interrupt, bulk, or isochronous transfers for ongoing communication. 
+ 
+
+    OHCI Root Port (0): Open host controller interface designed for usb 1.1 devices 
+        Enumeration begins -> device is detected and identified as USB2.0 Hub -> Device descriptor and config are successfully read 
+    EHCI Root Port (0): Enhanced HCI designed for usb 2.0 devices 
+        Enumeration begins -> device is detected with high speed chars -> config inc multi endpoints and alternate interfaces. OHCI disconnects and transition to EHCI. EHCI device operates in standalone mode. 
+
+
+    USB device: mouse,keyboard(pheripheral device) 
+    USB host: host managing connected devices 
+    USB classes: standard device types (HID, CDC, MSC, Hub) 
+    Endpoints: logical communication channels 
+    Transfers: data exchange modes (control, bulk, interrupt, isochronous) 
+    HCD: host controller driver, interfacing with usb stack (manage operations), data transfer, handle communication protocols 
+    Interface descriptor: details about HID, MSC, audio (specific function) 
+    ED: Endpoint descriptor, characterstics of endpoint (channels for data transfer) on usb device. Tells how to communicate with device (type of transfer, max packer size, polling interval, In/Out) 
+    Enumeration: host queries hub, assign unique address on bus and activate hub. 
+    Power intialization -> host issue reset signal -> device speed negotiation(host sends chirp signal) -> Enumeration 
+        Host sends GET_DESCRIPTOR req to retrieve hub's device descriptor 
+        Device descriptor(vendor id, product id, device class, max packet size for endpoint 0) 
+        Host assign unique usb address to hub using SET_ADDRESS request 
+        Get full device descriptor -> configuration descriptor(power and interface config, interrupt endpoints) and hub descriptor(info about noOfPorts, power switching) 
+        Host sends SET_CONFIGURATION req to activate hub 
+        Once enumerated, hub class driver is loaded 
+        Hub class driver -> parse the hub descriptor, initialize hub, monitor hub's port for changes 
+        host initialize its ports and enumerates any devices connected to the hub. 
+        Host communicate directly with devices connected to hub via their unique addresses 
+
+ 
+
+    Control Transfers : Used for configuration and management. Common during enumeration (e.g., getting descriptors, setting addresses). Bidirectional communication (host ↔ device). 
+    Bulk Transfers : For large, non-time-critical data (e.g., file transfers in MSC).Reliable but with no guaranteed latency. 
+    Interrupt Transfers : Low-latency communication for small, time-sensitive data (e.g., HID devices like keyboards and mice). Polled periodically by the host. 
+    Isochronous Transfers : Real-time, continuous data with guaranteed timing (e.g., audio and video streaming). No error recovery. 
+
+ 
+    QTD – queue transfer descriptor (represent an individual USB data transfer request) 
+        Contains info about single usb transaction – buffer address, data length, transfer status, packet identifier, control flags 
+        Linked together to form a Transfer Descriptor (TD) list. 
+        Transfers – Control, Bulk, Interrupt, Isochronous 
+        QTDs are consumed and processed by EHCI controller, uses info in QTD to generate USB packets for communication 
+        Queue Head (QH) - acts as a container for QTDs and organizes them into transfer queues. 
+        A QH represents a specific USB endpoint and manages list of QTDs asscociated with it. 
+
+
+# All libraries and their usages
+

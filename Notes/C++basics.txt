@@ -35,6 +35,8 @@
                 return recurse(x - 1);
             }
     11. Link time optimization :- can inline cross transaltion units
+    12. Named Return Value Optimization (NRVO) :- when returning local variable, compiler constructs that variable into callers expected mem location.
+        Instead of copy or move. Object is constructed in place. - https://0xghost.dev/blog/std-move-deep-dive/
 
 
 # Memory Structure of C++
@@ -116,7 +118,7 @@
 
 
 # BASICS
-    1. Bjarne Stroustrup - 1979 (c++20 stable)
+    1. Bjarne Stroustrup - 1979
     2. lvalue            :-  object that has an address (int i = 10) locater value
     3. rvalue            :-  expression that dont have any address - right value
     4. dangling pointer  :-  pointer that points to mem that is deallocated or not valid
@@ -774,7 +776,7 @@
 
     12. source = 300 bytes      file.i = 700 bytes      file.s = 2.3 kb
         file.o = 2.8 kb         execute = 16 kb         1kb => 200kb
-        GCC -> collection of preprocessor, linker, compiler, assembler
+        GCC -> collection of preprocessor, linker, compiler, assembler (GNU compiler collection)
 
     13. Symbol Table and OPTable
         a. Symbol Table

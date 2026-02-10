@@ -29,7 +29,7 @@ public:
     double area() const
     {
         // Need to use different name, same name will cause infinite recursion
-        // Even though object is Rectange, CTRP is static -> function lookup is compile-time -> calls Shape::area()
+        // Even though object is Rectange, CRTP is static -> function lookup is compile-time -> calls Shape::area()
         return static_cast<const Derived *>(this)->areaImpl();
     }
 };

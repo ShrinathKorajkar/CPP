@@ -1,0 +1,45 @@
+# Design Patterns
+    1. Singleton            7. Decorator                    13. Composite                       19. Memento                 25. Data Mapper
+    2. Factory              8. Command                      14. Chain of responsibility         20. Visitor                 26. Repository
+    3. Strategy             9. Proxy                        15. Mediator                        21. Bridge
+    4. Observer             10. Template method             16. Flyweight                       22. Abstract Factory
+    5. Adapter              11. Iterator                    17. Interpreter                     23. Facade
+    6. Builder              12. State                       18. Prototype                       24. Null Object
+    
+    -> Usage
+        a. Singleton - Builder           :- MUST KNOW (Very High Usage, Almost Every Project)
+        b. Decorator - State             :- VERY COMMON (High Usage)
+        c. Composite - Interpreter       :- Moderately Used (Medium Usage in Real Systems)
+        d. Prototype - Bridge            :- Rare in everyday projects (Low Usage)
+        e. Abstract Factory - Repository :- Very Rare (Niche / Academic / Legacy)
+    
+# Creational Patterns
+    1. Singleton
+    2. Factory
+    3. Builder
+    4. Prototype
+    5. Abstract Factory
+# Structural Patterns
+    1. Adapter
+    2. Decorator
+    3. Proxy
+    4. Composite
+    5. Flyweight
+    6. Bridge
+    7. Facade
+# Behavioral Patterns
+    1. Strategy
+    2. Observer
+    3. Command
+    4. Template Method
+    5. Iterator
+    6. State
+    7. Chain of Responsibility
+    8. Mediator
+    9. Memento
+    10. Interpreter
+    11. Visitor
+    12. Null Object
+# Architectural / Data Access (Not GoF Patterns)
+    1. Data Mapper
+    2. Repository

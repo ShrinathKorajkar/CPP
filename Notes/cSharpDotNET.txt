@@ -30,6 +30,7 @@ Which operators can be overloaded?
 Pre/post increment behavior in C#
 Why operator overloading is rare in business apps
 Overloading == and Equals together (very important)
+
 🔷 Generics (C# equivalent of Templates)
 Generics Basics
 Generics vs non-generics (type safety + performance)
@@ -46,6 +47,7 @@ Why List<T> is invariant
 Runtime vs Compile-time
 Why generics are reified in .NET (unlike Java)
 How CLR handles generic instantiation
+
 🔷 Collections (STL equivalent)
 Collection Types (Must Know)
 List<T> vs Array
@@ -62,6 +64,7 @@ Enumerators & Iterators
 Why IEnumerable<T> exists
 Deferred execution
 What happens when you enumerate twice?
+
 🔷 LINQ (Very Important)
 IEnumerable vs IQueryable
 Deferred vs immediate execution
@@ -69,6 +72,7 @@ Select vs SelectMany
 First vs FirstOrDefault
 Performance pitfalls of LINQ
 Why LINQ can hide bugs
+
 🔷 Memory Management & GC (CRITICAL)
 Garbage Collector
 How GC works in .NET (high-level)
@@ -80,6 +84,7 @@ Why using exists
 Dispose vs Finalizer
 When to implement IDisposable
 Common memory leak patterns in C#
+
 🔷 Multithreading & Async (VERY HIGH PRIORITY)
 Threads & Tasks
 Thread vs Task
@@ -104,6 +109,7 @@ Race Conditions & Deadlocks
 Common deadlock scenarios
 How to avoid deadlocks
 Producer–Consumer pattern in C#
+
 🔷 SOLID Principles (Very Common)
 Single Responsibility Principle (SRP)
 Open–Closed Principle (OCP)
@@ -112,6 +118,7 @@ Interface Segregation Principle (ISP)
 Dependency Inversion Principle (DIP)
 Expect:
 👉 “Which SOLID principles did you apply in your project?”
+
 🔷 Design Patterns (Extremely Important)
 MUST KNOW (Same as your C++ list)
 Singleton (thread-safe versions)
@@ -124,12 +131,14 @@ Builder
 How DI frameworks implement Factory
 Why Singleton is often discouraged
 Events as Observer pattern
+
 🔷 .NET Runtime & Architecture (Interview Favorite)
 CLR vs CTS vs CLS
 JIT vs AOT
 Assembly loading
 Strong-named assemblies
 AppDomain (legacy vs modern .NET)
+
 🔷 ASP.NET / Backend (If applicable)
 ASP.NET Core request pipeline
 Middleware
@@ -139,6 +148,7 @@ Scoped
 Transient
 Model binding
 Filters vs Middleware
+
 🔷 Tooling & Ecosystem
 Git
 Rebase vs merge
